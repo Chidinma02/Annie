@@ -1,0 +1,431 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'FranklinGothicATF';
+  src: url('/fonts/franklin-gothic-900.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FranklinGothicATF';
+  src: url('/fonts/franklin-gothic-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FranklinGothicATF';
+  src: url('/fonts/franklin-gothic-900-italic.woff2') format('woff2');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bello-Pro';
+  src: url('/fonts/bello-pro.ttf?v=2') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montreal-Medium';
+  src: url('/fonts/montreal-medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montreal-Regular';
+  src: url('/fonts/montreal-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PPMori-Regular';
+  src: url('/fonts/ppmori-regular.woff2') format('woff2'),
+       url('/fonts/ppmori.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tusker';
+  src: url('/fonts/TuskerStretch-VFVF.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --background: #edece8;
+  --foreground: #131313;
+  --accent: #266210;
+}
+
+@theme {
+  --font-sans: 'PPMori-Regular', sans-serif;
+  --font-medium: 'PPMori-Regular', sans-serif;
+  --font-mori: 'PPMori-Regular', sans-serif;
+  --font-tusker: 'PPMori-Regular', sans-serif;
+  --font-bello: 'Bello-Pro', cursive;
+  --font-franklin: 'PPMori-Regular', sans-serif;
+  --color-accent: var(--accent);
+
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+html {
+  font-size: 2.6666666667vw;
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 0.6944444444vw;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'PPMori-Regular', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Hide default cursor on desktop when hover is supported */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #c7bebe;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Infinite Marquee Animations */
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee-slow {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee-fast {
+  display: flex;
+  width: max-content;
+  animation: marquee 15s linear infinite;
+}
+
+/* Custom Link Animations */
+.menu-link-active {
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  transition: 0.3s ease;
+  width: fit-content;
+}
+
+.menu-link-active::before {
+  content: "";
+  left: 0;
+  position: absolute;
+  width: 100%;
+  background-color: #fff;
+  bottom: 0;
+  height: 1.5px;
+  transform: scaleX(0);
+  transform-origin: 100% 50%;
+  transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.menu-link-active:hover::before {
+  transform: scaleX(1);
+  transform-origin: 0 50%;
+}
+
+/* Credit background fill animation */
+.credit-item-hover {
+  background: linear-gradient(270deg, transparent 50%, var(--accent) 0) 100%;
+  background-position: 100.001% bottom;
+  background-size: 200% 100%;
+  transition: background-position 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.credit-item-hover:hover {
+  background-position: 0% bottom;
+  color: #fff;
+}
+
+/* ---------------------------------------------------- */
+@keyframes loading-wave {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.2em);
+  }
+}
+
+.loading-wave-text {
+  display: inline-block;
+  animation: loading-wave 1.2s ease-in-out infinite;
+}
+/* ---------------------------------------------------- */
+/* Field Day Sound Navigation Styling Overrides        */
+/* ---------------------------------------------------- */
+.l__menu {
+  display: flex !important;
+  justify-content: flex-start !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  position: fixed !important;
+  z-index: 50 !important;
+  padding: 1.5rem !important;
+  background-color: transparent !important;
+  transition: background-color 0.3s ease, border-bottom 0.3s ease !important;
+}
+
+.l__menu.scrolled {
+  background-color: #000000 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.menu__logo {
+  display: block !important;
+  color: #131313 !important;
+  transition: color 0.3s ease !important;
+}
+
+.menu__logo--img {
+  height: 100% !important;
+  object-fit: contain !important;
+  filter: none !important;
+  transition: filter 0.3s ease !important;
+}
+
+.menu__links {
+  display: flex !important;
+  margin-left: auto !important;
+  margin-top: 7px !important;
+}
+
+.menu__links--item {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.menu__links--item a,
+.menu__links--item p {
+  color: #131313 !important;
+  font-family: 'PPMori-Regular', sans-serif !important;
+  font-size: 1.4rem !important;
+  line-height: 1.68rem !important;
+  text-decoration: none !important;
+  transition: color 0.3s ease !important;
+}
+
+.l__menu.scrolled .menu__logo,
+.l__menu.scrolled .menu__links--item a,
+.l__menu.scrolled .menu__links--item p {
+  mix-blend-mode: normal !important;
+  color: #ffffff !important;
+}
+
+.l__menu.scrolled .menu__logo--img {
+  filter: invert(1) !important;
+}
+
+.menu__links--item .menu__link--label {
+  margin-bottom: 1.5rem !important;
+}
+
+.sublinks--item {
+  transition: 0.3s ease !important;
+}
+
+.menu__links--sub {
+  display: none !important;
+}
+
+.menu--work {
+  margin-right: 5.5rem !important;
+}
+
+@media (min-width: 1024px) {
+  .l__menu {
+    padding: 1.5rem 4rem 0 4rem !important;
+  }
+  
+  .menu__logo {
+    width: auto !important;
+  }
+  
+  .menu__logo--img {
+    height: 60px !important;
+    width: 170px !important;
+  }
+  
+  .menu--work {
+    margin-right: 15rem !important;
+    width: auto !important;
+  }
+  
+  .menu--about {
+    width: auto !important;
+  }
+
+  .menu__links {
+    margin-top: 1.5rem !important;
+    margin-right: 15vw !important;
+  }
+
+  .menu__links--sub {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    transition: opacity 0.3s ease !important;
+  }
+
+  .menu__links--sub.--visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .menu__links--sub.--hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .menu__links--item:hover .menu__links--sub {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+}
+
+/* ---------------------------------------------------- */
+/* Selected Image / Video Hover Card Styles from fielddaysound.tv */
+/* ---------------------------------------------------- */
+.selected__image {
+  height: 20.7rem !important;
+  pointer-events: none !important;
+  position: fixed !important;
+  width: 38.3rem !important;
+  z-index: 99 !important;
+  
+  /* Initial clipped state (hidden/diagonal slash) */
+  clip-path: polygon(0 0, 100% 0, 100% 0%, 0 0%) !important;
+  transition: clip-path 0.8s cubic-bezier(0.76, 0, 0.24, 1) !important;
+}
+
+.selected__image.active {
+  /* Slanted bottom edge when active */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%) !important;
+}
+
+.selected__image .selected--image {
+  height: 100% !important;
+  left: 0 !important;
+  object-fit: cover !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  top: 0 !important;
+  width: 100% !important;
+  z-index: 2 !important;
+  
+  /* Initial scale and clip state for reveal parallax effect, cropping letterboxes */
+  transform: scale(1.4) !important;
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%) !important;
+  transition: clip-path 0.8s cubic-bezier(0.76, 0, 0.24, 1), transform 0.8s cubic-bezier(0.76, 0, 0.24, 1) !important;
+}
+
+.selected__image.active .selected--image {
+  /* Slanted top edge when active to make room for name and active scale */
+  transform: scale(1.25) !important;
+  clip-path: polygon(0 15%, 100% 0%, 100% 100%, 0 100%) !important;
+}
+
+.selected__image .selected__image--name {
+  font-family: 'PPMori-Regular', sans-serif !important;
+  font-size: 1.4rem !important;
+  left: 0 !important;
+  line-height: 1.68rem !important;
+  position: absolute !important;
+  top: 1rem !important;
+  z-index: 1 !important;
+  color: #131313 !important;
+  mix-blend-mode: difference !important;
+  opacity: 0 !important;
+  transition: opacity 0.4s ease !important;
+}
+
+.selected__image.active .selected__image--name {
+  opacity: 1 !important;
+}
+
+@keyframes fontWave {
+  0%, 100% {
+    font-variation-settings: "hght" 1, "wdth" 0;
+  }
+  50% {
+    font-variation-settings: "hght" 100, "wdth" 0;
+  }
+}
+
+.marquee-title-char {
+  display: inline-block;
+  font-variation-settings: "hght" 1, "wdth" 0;
+  transition: font-variation-settings 0.5s ease-out, color 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+.marquee-title.is-hovered .marquee-title-char {
+  animation: fontWave 1.2s ease-in-out infinite;
+  animation-delay: calc(var(--char-index) * 0.08s);
+  color: var(--accent) !important;
+}
+
+.marquee-title.is-dimmed .marquee-title-char {
+  font-variation-settings: "hght" 1, "wdth" 0;
+  color: #fff !important;
+  opacity: 0.15;
+}
