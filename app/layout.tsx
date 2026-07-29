@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Aniedoabasi",
     description: "Welcome to Aniedoabasi. We are an award winning creative sound and music company.",
-    images: ["https://fielddaysound.tv/og.jpeg"],
   }
 };
 
