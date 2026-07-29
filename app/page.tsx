@@ -340,20 +340,8 @@ function MobileLanding() {
     }
   }, [activeVideoUrl]);
 
-  // Initialize the first project's video loop on mobile load since hover is not available
-  useEffect(() => {
-    if (featuredProjects.length > 0) {
-      const firstProj = featuredProjects[0];
-      setHoveredUid(firstProj.uid);
-      const videoUrl = getVideoForProject(firstProj);
-      if (videoUrl) {
-        setActiveVideoUrl(videoUrl);
-      }
-    }
-  }, []);
-
-  // Track horizontal scroll position on mobile to dynamically highlight/play the centered project
-  const handleScroll = () => {
+  // Helper to update active project based on scroll/center position
+  const updateActiveProject = () => {
     if (!scrollRef.current) return;
     const container = scrollRef.current;
 
@@ -385,6 +373,11 @@ function MobileLanding() {
     }
   };
 
+  // Track horizontal scroll position on mobile to dynamically highlight/play the centered project
+  const handleScroll = () => {
+    updateActiveProject();
+  };
+
   // Dragging event handlers for touch/swipe
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!scrollRef.current) return;
@@ -393,6 +386,7 @@ function MobileLanding() {
     startXRef.current = e.clientX - scrollRef.current.offsetLeft;
     scrollLeftRef.current = scrollRef.current.scrollLeft;
     setDragDistance(0);
+    updateActiveProject();
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -409,6 +403,24 @@ function MobileLanding() {
     setIsDragging(false);
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!scrollRef.current) return;
+    isDraggingRef.current = true;
+    setIsDragging(true);
+    startXRef.current = e.touches[0].clientX - scrollRef.current.offsetLeft;
+    scrollLeftRef.current = scrollRef.current.scrollLeft;
+    setDragDistance(0);
+    updateActiveProject();
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDraggingRef.current || !scrollRef.current) return;
+    const x = e.touches[0].clientX - scrollRef.current.offsetLeft;
+    const walk = (x - startXRef.current) * 1.5;
+    scrollRef.current.scrollLeft = scrollLeftRef.current - walk;
+    setDragDistance(Math.abs(x - startXRef.current));
+  };
+
   const handleLinkClick = (e: React.MouseEvent, href: string) => {
     if (dragDistance > 25) {
       e.preventDefault();
@@ -416,14 +428,22 @@ function MobileLanding() {
     setDragDistance(0);
   };
 
-  // Run scroll checks initially
-  useEffect(() => {
-    const timer = setTimeout(handleScroll, 200);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
-    <div className="flex-1 flex flex-col h-screen w-screen overflow-hidden select-none bg-[#edece8] relative">
+    <div
+      onTouchStart={(e) => {
+        if (scrollRef.current && !scrollRef.current.contains(e.target as Node)) {
+          setHoveredUid(null);
+          setActiveVideoUrl(null);
+        }
+      }}
+      onMouseDown={(e) => {
+        if (scrollRef.current && !scrollRef.current.contains(e.target as Node)) {
+          setHoveredUid(null);
+          setActiveVideoUrl(null);
+        }
+      }}
+      className="flex-1 flex flex-col h-screen w-screen overflow-hidden select-none bg-[#edece8] relative"
+    >
 
       {/* Fullscreen background video with dual-video crossfade */}
       <div
@@ -505,6 +525,9 @@ function MobileLanding() {
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleMouseUp}
           onScroll={handleScroll}
           className="w-full overflow-x-auto whitespace-nowrap scrollbar-none select-none active:cursor-grabbing py-4 relative"
           style={{ scrollbarWidth: 'none' }}

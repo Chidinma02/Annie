@@ -17,8 +17,8 @@ export default function Preloader() {
     setIsLoaded(false);
 
     let current = 0;
-    const duration = 5000; // 5 seconds (slowed down from 2s)
-    const intervalTime = 30;
+    const duration = 1200; // 1.2 seconds for a fast, responsive load
+    const intervalTime = 20;
     const step = 100 / (duration / intervalTime);
 
     const timer = setInterval(() => {
@@ -48,7 +48,7 @@ export default function Preloader() {
     >
       {/* Intro company tagline at top left on mobile, bottom left on desktop */}
       <h2 className="text-white font-tusker text-[30px] md:text-[50px] uppercase tracking-normal leading-[35px] md:leading-[55px] font-light max-w-[280px] md:max-w-[450px]">
-        we are a creative sound and music company.
+        I am a multi disciplinary creative .
       </h2>
 
       {/* Percentage Count */}

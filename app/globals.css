@@ -111,9 +111,10 @@ body {
   overflow-x: hidden;
 }
 
-/* Hide default cursor on desktop when hover is supported */
+/* Hide default cursor on desktop when hover is supported on landing page only */
 @media (pointer: fine) {
-  * {
+  .cursor-none-page,
+  .cursor-none-page * {
     cursor: none !important;
   }
 }

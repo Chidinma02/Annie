@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 
 export const triggerProjectHover = (url: string | null, name: string | null) => {
   if (typeof window !== 'undefined') {
@@ -17,6 +18,9 @@ export const triggerDragMode = (active: boolean) => {
 };
 
 export default function Cursor() {
+  const pathname = usePathname();
+  const isLandingPage = pathname === '/';
+
   const [isVisible, setIsVisible] = useState(false);
   const [dragMode, setDragMode] = useState(false);
   const [preview, setPreview] = useState<{ url: string | null; name: string | null }>({
@@ -35,8 +39,21 @@ export default function Cursor() {
   const previewRef = useRef<HTMLDivElement>(null);
   const hoverVideoRef = useRef<HTMLVideoElement>(null);
 
+  // Toggle class on <html> to hide default cursor only on landing page
+  useEffect(() => {
+    if (isLandingPage) {
+      document.documentElement.classList.add('cursor-none-page');
+    } else {
+      document.documentElement.classList.remove('cursor-none-page');
+    }
+    return () => {
+      document.documentElement.classList.remove('cursor-none-page');
+    };
+  }, [isLandingPage]);
+
   // Maintain active hover content states to let exit transitions play out
   useEffect(() => {
+    if (!isLandingPage) return;
     if (preview.url) {
       setActiveUrl(preview.url);
       setActiveName(preview.name);
@@ -47,10 +64,11 @@ export default function Cursor() {
       }, 800); // matches the 0.8s CSS transition duration
       return () => clearTimeout(timer);
     }
-  }, [preview.url, preview.name]);
+  }, [preview.url, preview.name, isLandingPage]);
 
   // Programmatic play trigger on activeUrl change to bypass browser autoplay blocks
   useEffect(() => {
+    if (!isLandingPage) return;
     if (hoverVideoRef.current && activeUrl && activeUrl.includes('.mp4')) {
       hoverVideoRef.current.load();
       const playPromise = hoverVideoRef.current.play();
@@ -60,9 +78,11 @@ export default function Cursor() {
         });
       }
     }
-  }, [activeUrl]);
+  }, [activeUrl, isLandingPage]);
 
   useEffect(() => {
+    if (!isLandingPage) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       mouseCoords.current = { x: e.clientX, y: e.clientY };
       previewCoords.current = { x: e.clientX, y: e.clientY };
@@ -133,8 +153,9 @@ export default function Cursor() {
       window.removeEventListener('cursor-drag', handleCustomDrag);
       cancelAnimationFrame(frameId);
     };
-  }, []);
+  }, [isLandingPage]);
 
+  if (!isLandingPage) return null;
   if (!isVisible) return null;
 
   return (

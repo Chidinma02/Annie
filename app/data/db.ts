@@ -614,6 +614,7 @@ export const projects: Project[] = [
       }
     ]
   },
+  /*
   {
     "uid": "elc",
     "client": "ELC",
@@ -632,6 +633,7 @@ export const projects: Project[] = [
     ],
     "images": []
   },
+  */
   {
     "uid": "dixtrict-26",
     "client": "Dixtrict 26",
