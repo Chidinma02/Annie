@@ -17,6 +17,22 @@ const isImageUrl = (url: string | null): boolean => {
   return /\.(jpeg|jpg|gif|png|webp|svg)($|\?)/i.test(url);
 };
 
+const isYouTubeUrl = (url: string | null): boolean => {
+  if (!url) return false;
+  return /youtube\.com|youtu\.be/i.test(url);
+};
+
+const getYouTubeEmbedUrl = (url: string | null): string | null => {
+  if (!url) return null;
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  if (match && match[2].length === 11) {
+    const videoId = match[2];
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0`;
+  }
+  return null;
+};
+
 interface WorkItemVideoProps {
   src: string | null;
   isActive: boolean;
@@ -34,6 +50,17 @@ function WorkItemVideo({ src, isActive }: WorkItemVideoProps) {
         className="absolute inset-0 w-full h-full object-cover z-10"
         alt="Project preview"
         unoptimized={process.env.NODE_ENV === 'development'}
+      />
+    );
+  }
+
+  if (isYouTubeUrl(src)) {
+    return (
+      <iframe
+        src={`${getYouTubeEmbedUrl(src)}&background=1&controls=0`}
+        className="absolute inset-0 w-full h-full object-cover z-10"
+        style={{ border: 0, pointerEvents: 'none' }}
+        allow="autoplay; encrypted-media"
       />
     );
   }

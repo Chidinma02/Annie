@@ -13,6 +13,22 @@ const isImageUrl = (url: string | null): boolean => {
   return /\.(jpeg|jpg|gif|png|webp|svg)($|\?)/i.test(url);
 };
 
+const isYouTubeUrl = (url: string | null): boolean => {
+  if (!url) return false;
+  return /youtube\.com|youtu\.be/i.test(url);
+};
+
+const getYouTubeEmbedUrl = (url: string | null): string | null => {
+  if (!url) return null;
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  if (match && match[2].length === 11) {
+    const videoId = match[2];
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&vq=hd1080&vq=highres&hd=1`;
+  }
+  return null;
+};
+
 const getVideoForProject = (p: typeof allHomepageProjects[0]) => {
   if (p.visualUrl && !isImageUrl(p.visualUrl)) return p.visualUrl;
   if (p.mainVideoUrl && !isImageUrl(p.mainVideoUrl)) return p.mainVideoUrl;
@@ -168,6 +184,13 @@ function DesktopLanding() {
                 className="absolute inset-0 w-full h-full object-cover"
                 alt="Background project"
               />
+            ) : isYouTubeUrl(player1Url) ? (
+              <iframe
+                src={`${getYouTubeEmbedUrl(player1Url)}&background=1&controls=0`}
+                className="absolute inset-0 w-full h-full"
+                style={{ border: 0, pointerEvents: 'none' }}
+                allow="autoplay; encrypted-media"
+              />
             ) : (
               <>
                 {player1Img && (
@@ -200,6 +223,13 @@ function DesktopLanding() {
                 src={decodeURI(player2Url)}
                 className="absolute inset-0 w-full h-full object-cover"
                 alt="Background project"
+              />
+            ) : isYouTubeUrl(player2Url) ? (
+              <iframe
+                src={`${getYouTubeEmbedUrl(player2Url)}&background=1&controls=0`}
+                className="absolute inset-0 w-full h-full"
+                style={{ border: 0, pointerEvents: 'none' }}
+                allow="autoplay; encrypted-media"
               />
             ) : (
               <>
@@ -460,13 +490,20 @@ function MobileLanding() {
                 className="absolute inset-0 w-full h-full object-cover"
                 alt="Background project"
               />
+            ) : isYouTubeUrl(player1Url) ? (
+              <iframe
+                src={`${getYouTubeEmbedUrl(player1Url)}&background=1&controls=0`}
+                className="iframe-cover"
+                style={{ border: 0, pointerEvents: 'none' }}
+                allow="autoplay; encrypted-media"
+              />
             ) : (
               <>
                 {player1Img && (
                   <img
-                    src={decodeURI(player1Img)}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    alt="Background project loading placeholder"
+                     src={decodeURI(player1Img)}
+                     className="absolute inset-0 w-full h-full object-cover"
+                     alt="Background project loading placeholder"
                   />
                 )}
                 <video
@@ -492,6 +529,13 @@ function MobileLanding() {
                 src={decodeURI(player2Url)}
                 className="absolute inset-0 w-full h-full object-cover"
                 alt="Background project"
+              />
+            ) : isYouTubeUrl(player2Url) ? (
+              <iframe
+                src={`${getYouTubeEmbedUrl(player2Url)}&background=1&controls=0`}
+                className="iframe-cover"
+                style={{ border: 0, pointerEvents: 'none' }}
+                allow="autoplay; encrypted-media"
               />
             ) : (
               <>

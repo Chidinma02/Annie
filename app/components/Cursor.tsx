@@ -3,6 +3,22 @@
 import { useEffect, useState, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 
+const isYouTubeUrl = (url: string | null): boolean => {
+  if (!url) return false;
+  return /youtube\.com|youtu\.be/i.test(url);
+};
+
+const getYouTubeEmbedUrl = (url: string | null): string | null => {
+  if (!url) return null;
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  if (match && match[2].length === 11) {
+    const videoId = match[2];
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0`;
+  }
+  return null;
+};
+
 export const triggerProjectHover = (url: string | null, name: string | null) => {
   if (typeof window !== 'undefined') {
     const event = new CustomEvent('cursor-hover-project', { detail: { url, name } });
@@ -205,7 +221,14 @@ export default function Cursor() {
       >
         {activeUrl && (
           <>
-            {activeUrl.includes('.mp4') ? (
+            {isYouTubeUrl(activeUrl) ? (
+              <iframe
+                src={getYouTubeEmbedUrl(activeUrl) || ''}
+                className="selected--image"
+                style={{ border: 0, pointerEvents: 'none', width: '100%', height: '100%' }}
+                allow="autoplay; encrypted-media"
+              />
+            ) : activeUrl.includes('.mp4') ? (
               <video
                 ref={hoverVideoRef}
                 src={activeUrl}

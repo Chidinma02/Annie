@@ -258,12 +258,12 @@ export const projects: Project[] = [
         "secondImageText": null
       },
       {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/AEO_web.mp4",
+        "imageUrl": "https://www.youtube.com/watch?v=MqiVvpvjC0E",
         "imageText": null,
         "secondImageText": null
       },
       {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Christmas_Ad_web.mp4",
+        "imageUrl": "https://www.youtube.com/watch?v=s2bZNjaQaHM",
         "imageText": null,
         "secondImageText": null
       },
@@ -273,27 +273,28 @@ export const projects: Project[] = [
         "secondImageText": null
       },
       {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Chuka_web.mp4",
+        "imageUrl": "https://www.youtube.com/watch?v=iwnc5Os60e0",
         "imageText": null,
         "secondImageText": null
       },
       {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Combined_Leaders_web.mp4",
+        "imageUrl": "https://www.youtube.com/watch?v=8Fk3Ls1Vr_U",
         "imageText": null,
         "secondImageText": null
       },
       {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Deji_web.mp4",
+        "imageUrl": "https://www.youtube.com/watch?v=c6hVVfFZRy0",
         "imageText": null,
         "secondImageText": null
       },
       {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Jordan_web.mp4",
+        // "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Jordan_web.mp4",
+        "imageUrl": "https://www.youtube.com/watch?v=72boLm5qi-E",
         "imageText": null,
         "secondImageText": null
       },
       {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Limoblaze_web.mp4",
+        "imageUrl": "https://www.youtube.com/watch?v=wieuniPRDYQ",
         "imageText": null,
         "secondImageText": null
       },
@@ -303,7 +304,7 @@ export const projects: Project[] = [
         "secondImageText": null
       },
       {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Tunde_faststart.mp4",
+        "imageUrl": "https://www.youtube.com/watch?v=MmnSLdfaftI",
         "imageText": null,
         "secondImageText": null
       }

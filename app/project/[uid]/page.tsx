@@ -14,6 +14,22 @@ const isImageUrl = (url: string | null): boolean => {
   return /\.(jpeg|jpg|gif|png|webp|svg)($|\?)/i.test(url);
 };
 
+const isYouTubeUrl = (url: string | null): boolean => {
+  if (!url) return false;
+  return /youtube\.com|youtu\.be/i.test(url);
+};
+
+const getYouTubeEmbedUrl = (url: string | null, muted = true): string | null => {
+  if (!url) return null;
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  if (match && match[2].length === 11) {
+    const videoId = match[2];
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=${muted ? 1 : 0}&loop=1&playlist=${videoId}&controls=1&vq=hd1080&vq=highres&hd=1`;
+  }
+  return null;
+};
+
 const chunkImagesIntoRows = (images: { imageUrl?: string | null; secondImageUrl?: string | null }[]) => {
   const flatAssets: string[] = [];
   images.forEach(img => {
@@ -95,14 +111,10 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
     }
   }, [activeVideoUrl]);
 
-  // Check window size on load and resize to detect mobile viewport with touch support
+  // Check window size on load and resize to detect mobile viewport
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(
-        window.innerWidth < 1024 ||
-        ('ontouchstart' in window) ||
-        (navigator.maxTouchPoints > 0)
-      );
+      setIsMobile(window.innerWidth < 1024);
     };
     checkMobile();
     window.addEventListener('resize', checkMobile);
@@ -248,6 +260,12 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
   };
   // Handle Play/Mute toggle
   const handleVideoClick = () => {
+    if (heroVideoUrl && isYouTubeUrl(heroVideoUrl)) {
+      setHasStartedPlaying(true);
+      setIsPlaying(true);
+      return;
+    }
+
     if (!videoRef.current) return;
 
     if (!hasStartedPlaying) {
@@ -281,15 +299,25 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
           onClick={handleVideoClick}
         >
           {heroVideoUrl && (
-            <video
-              ref={videoRef}
-              src={heroVideoUrl}
-              className={childMediaClass}
-              loop
-              muted={isMuted}
-              playsInline
-              controls={hasStartedPlaying}
-            />
+            isYouTubeUrl(heroVideoUrl) ? (
+              <iframe
+                src={getYouTubeEmbedUrl(heroVideoUrl, false) || ''}
+                className={isLandscape ? "absolute inset-0 w-full h-full" : "w-full h-auto block"}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{ border: 0, width: '100%', aspectRatio: '16/9' }}
+              />
+            ) : (
+              <video
+                ref={videoRef}
+                src={heroVideoUrl}
+                className={childMediaClass}
+                loop
+                muted={isMuted}
+                playsInline
+                controls={hasStartedPlaying}
+              />
+            )
           )}
 
           {!hasStartedPlaying && (
@@ -431,15 +459,25 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
                       unoptimized={process.env.NODE_ENV === 'development'}
                     />
                   ) : (
-                    <video
-                      src={img.url}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      controls
-                      className={videoClass}
-                    />
+                    isYouTubeUrl(img.url) ? (
+                      <iframe
+                        src={getYouTubeEmbedUrl(img.url) || ''}
+                        className={videoClass.replace('object-cover', '')}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        style={{ border: 0, width: '100%', height: '100%', aspectRatio: '16/9' }}
+                      />
+                    ) : (
+                      <video
+                        src={img.url}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        controls
+                        className={videoClass}
+                      />
+                    )
                   )}
                 </div>
               );

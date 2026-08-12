@@ -430,3 +430,24 @@ body {
   color: #fff !important;
   opacity: 0.15;
 }
+
+/* YouTube/Vimeo iframe object-cover behavior */
+.iframe-cover {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 56.25vw; /* 16:9 ratio for landscape */
+  min-width: 100%;
+  min-height: 100%;
+  border: 0;
+  pointer-events: none;
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .iframe-cover {
+    width: 177.77vh; /* 16:9 ratio for portrait */
+    height: 100vh;
+  }
+}
