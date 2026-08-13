@@ -62,16 +62,17 @@ export const projects: Project[] = [
     "images": []
   },
   {
-    "uid": "nike-so-win",
-    "client": "Nike",
-    "name": "Football",
+    "uid": "world-cup",
+    "client": "World Cup",
+    "name": "Dream",
     "categories": [
       "Creative",
       "Concept"
     ],
-    "thumbnailUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/16_9 (2).png",
-    "visualUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/16_9 (2).png",
-    "mainVideoUrl": null,
+    "thumbnailUrl": null,
+    "visualUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786640036/World_cup_dream_ubm9m9.mp4",
+    "mainVideoUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786640036/World_cup_dream_ubm9m9.mp4",
+    "aspectRatio": "landscape",
     "description": "Nike's all-new C1TY is a tough, stylish shoe, built to keep up with those with shit to do and places to be. To turn heads in NYC, we staged a heist-worthy spectacle—\"leaking\" surveillance footage of an 18-ton truck packed with C1TYs getting tagged with graffiti and broken into. Then, we proceeded to crash the truck in a Lower East Side parking lot to hand the shoes out . The result? Pure NYC chaos: rowdy lines around the block, a few unimpressed cops, and a city full of go-getters laced up for whatever's next.",
     "credits": [
       "Made with Benson Wink for Nike",
@@ -82,6 +83,11 @@ export const projects: Project[] = [
       "Video: Yohan Yoon, Brandon Yoon, Yavez Anthonio"
     ],
     "images": [
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/16_9 (2).png",
+        "imageText": null,
+        "secondImageText": null
+      },
       {
         "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combineall/final comp_20.png",
         "imageText": null,
@@ -742,7 +748,7 @@ export const projects: Project[] = [
         "secondImageText": null
       },
       {
-        "imageUrl": "/Images/Caveat Emptor/AR Studio-6.jpg",
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Caveat Emptor/AR Studio-6.jpg",
         "imageText": null,
         "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Caveat Emptor/AR Studio-7.jpg",
         "secondImageText": null
@@ -1038,19 +1044,19 @@ export const projects: Project[] = [
       {
         "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/linen/3.jpg",
         "imageText": null,
-        "secondImageUrl": "/Images/linen/4.jpg",
+        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/linen/4.jpg",
         "secondImageText": null
       },
       {
-        "imageUrl": "/Images/linen/5.jpg",
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/linen/5.jpg",
         "imageText": null,
-        "secondImageUrl": "/Images/linen/6.jpg",
+        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/linen/6.jpg",
         "secondImageText": null
       },
       {
-        "imageUrl": "/Images/linen/7.jpg",
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/linen/7.jpg",
         "imageText": null,
-        "secondImageUrl": "/Images/linen/8.jpg",
+        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/linen/8.jpg",
         "secondImageText": null
       },
       {
