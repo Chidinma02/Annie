@@ -44,6 +44,24 @@ export interface AboutData {
 
 export const projects: Project[] = [
   {
+    "uid": "ijgb",
+    "client": "IJGB",
+    "name": "IJGB",
+    "categories": [
+      "Creative",
+      "Concept"
+    ],
+    "thumbnailUrl": null,
+    "visualUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786602406/IJGB_dcvfux.mp4",
+    "mainVideoUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786602406/IJGB_dcvfux.mp4",
+    "aspectRatio": "landscape",
+    "description": "Sound design, custom music supervisions and mixing by Aniedoabasi.",
+    "credits": [
+      "Sound Design & Mix: Aniedoabasi"
+    ],
+    "images": []
+  },
+  {
     "uid": "nike-so-win",
     "client": "Nike",
     "name": "Football",
@@ -293,12 +311,12 @@ export const projects: Project[] = [
         "imageText": null,
         "secondImageText": null
       },
-      {
-        // "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Jordan_web.mp4",
-        "imageUrl": "https://www.youtube.com/watch?v=72boLm5qi-E",
-        "imageText": null,
-        "secondImageText": null
-      },
+      // {
+      //   // "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Jordan_web.mp4",
+      //   "imageUrl": "https://www.youtube.com/watch?v=72boLm5qi-E",
+      //   "imageText": null,
+      //   "secondImageText": null
+      // },
       {
         "imageUrl": "https://www.youtube.com/watch?v=wieuniPRDYQ",
         "imageText": null,
