@@ -241,6 +241,12 @@ export const projects: Project[] = [
         "secondImageText": null
       },
       {
+        "imageUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786600516/Juicyway_headshots_jy1ngm.mp4",
+        "imageText": null,
+        "secondImageText": null
+      },
+
+      {
         "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/21.jpg",
         "imageText": null,
         "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/22.png",
