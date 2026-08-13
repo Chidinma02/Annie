@@ -174,7 +174,7 @@ export const projects: Project[] = [
     ],
     "thumbnailUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/23.png",
     "visualUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/23.png",
-    "mainVideoUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Combined_Leaders_web.mp4",
+    "mainVideoUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/Copy_of_Christmas_Ad_cp_al8ktb.mp4",
     "description": "Sound design, custom music supervisions and mixing by Aniedoabasi.",
     "credits": [
       "Sound Design & Mix: Aniedoabasi"
