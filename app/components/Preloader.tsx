@@ -1,8 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Preloader() {
+  const router = useRouter();
   const [count, setCount] = useState(0);
   const [isLoaded, setIsLoaded] = useState(true); // Default to true for SSR, then set to false if needed
 
@@ -29,21 +31,23 @@ export default function Preloader() {
         setTimeout(() => {
           setIsLoaded(true);
           sessionStorage.setItem('fieldday_preloader_run', 'true');
+          router.push('/');
         }, 300); // Small pause at 100%
       }
       setCount(Math.floor(current));
     }, intervalTime);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [router]);
 
   if (isLoaded) return null;
 
   return (
     <div
-      className="fixed inset-0 w-full h-full bg-[#131313] z-[999] flex flex-col justify-between p-6 md:p-12 transition-transform duration-800 cubic-bezier(0.76, 0, 0.24, 1)"
+      className="fixed inset-0 w-full h-full bg-[#131313] z-[999] flex flex-col justify-between p-6 md:p-12"
       style={{
         transform: count === 100 ? 'translateY(-100%)' : 'translateY(0%)',
+        transition: 'transform 800ms cubic-bezier(0.76, 0, 0.24, 1)',
       }}
     >
       {/* Intro company tagline at top left on mobile, bottom left on desktop */}

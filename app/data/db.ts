@@ -62,6 +62,24 @@ export const projects: Project[] = [
     "images": []
   },
   {
+    "uid": "huddle",
+    "client": "Huddle",
+    "name": "The Return",
+    "categories": [
+      "Creative",
+      "Concept"
+    ],
+    "thumbnailUrl": null,
+    "visualUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786646285/The_Return_of_the_Huddle_cp_z4l2xc.mp4",
+    "mainVideoUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786646285/The_Return_of_the_Huddle_cp_z4l2xc.mp4",
+    "aspectRatio": "landscape",
+    "description": "Sound design and mix for The Return of the Huddle by Aniedoabasi.",
+    "credits": [
+      "Sound Design & Mix: Aniedoabasi"
+    ],
+    "images": []
+  },
+  {
     "uid": "world-cup",
     "client": "World Cup",
     "name": "Dream",
@@ -460,8 +478,8 @@ export const projects: Project[] = [
       "Concept"
     ],
     "thumbnailUrl": null,
-    "visualUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Michael_web.mp4",
-    "mainVideoUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Michael_web.mp4",
+    "visualUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786652791/Seabreeze_cp_bfmo9y.mp4",
+    "mainVideoUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786652791/Seabreeze_cp_bfmo9y.mp4",
     "aspectRatio": "landscape",
     "galleryAspect": "portrait",
     "description": "Sound design, custom music supervisions and mixing by Aniedoabasi.",
@@ -470,8 +488,16 @@ export const projects: Project[] = [
     ],
     "images": [
       {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Michael_web.mp4",
+        "imageText": null,
+        "secondImageUrl": "",
+        "secondImageText": null
+      },
+      {
         "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Seabreeze_redesign_web.mp4",
-        "imageText": null
+        "imageText": null,
+        "secondImageUrl": "",
+        "secondImageText": null
       }
     ]
   },
@@ -1183,15 +1209,22 @@ export const projects: Project[] = [
       "Creative",
       "Concept"
     ],
-    "thumbnailUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/DHK_White Logo (1).png",
-    "visualUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/DHK_web.mp4",
-    "mainVideoUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/DHK_web.mp4",
+    "thumbnailUrl": null,
+    "visualUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786646485/DHK_2_trl5tc.mp4",
+    "mainVideoUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786646485/DHK_2_trl5tc.mp4",
     "aspectRatio": "landscape",
     "description": "Sound design, custom music supervisions and mixing by Aniedoabasi.",
     "credits": [
       "Sound Design & Mix: Aniedoabasi"
     ],
-    "images": []
+    "images": [
+      {
+        "imageUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786650991/DHK_final_1_hdtntu.mp4",
+        "imageText": null,
+        "secondImageUrl": "",
+        "secondImageText": null
+      }
+    ]
   },
   {
     "uid": "world-smile-day",
