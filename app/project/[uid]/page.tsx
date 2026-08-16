@@ -62,6 +62,17 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
   const [hasStartedPlaying, setHasStartedPlaying] = useState(false);
   const [overlayText, setOverlayText] = useState('Play');
 
+  useEffect(() => {
+    if (hasStartedPlaying) {
+      document.body.classList.add('video-playing');
+    } else {
+      document.body.classList.remove('video-playing');
+    }
+    return () => {
+      document.body.classList.remove('video-playing');
+    };
+  }, [hasStartedPlaying]);
+
   const [activeVideoUrl, setActiveVideoUrl] = useState<string | null>(null);
   const [hoveredUid, setHoveredUid] = useState<string | null>(null);
 
@@ -397,20 +408,8 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
         {/* Spacer Column (Under Year) */}
         <div className="lg:col-span-1 hidden lg:block" />
 
-        {/* Credits Column */}
-        <div className="lg:col-span-2 flex flex-col gap-1">
-          <h4 className="font-franklin font-black text-[2.1rem] uppercase text-black mb-1.5" style={{ letterSpacing: '0.01rem' }}>CREDITS</h4>
-          <div className="flex flex-col gap-1">
-            {project.credits.map((cred, idx) => (
-              <p key={idx} className="font-franklin font-bold text-[1.45rem] lg:text-[1.2rem] leading-[1.1] tracking-[-0.03em] text-black">
-                {cred.trim()}
-              </p>
-            ))}
-          </div>
-        </div>
-
         {/* Role Column */}
-        <div className="lg:col-span-2 flex flex-col gap-1">
+        <div className="lg:col-span-3 flex flex-col gap-1">
           <h4 className="font-franklin font-black text-[2.1rem] uppercase tracking-[-0.04em] text-black mb-1.5" style={{ letterSpacing: '0.01rem' }}>ROLE</h4>
           <p className="font-franklin font-bold text-[1.45rem] lg:text-[1.2rem] leading-[1.1] tracking-[-0.03em] text-black">
             {project.categories.map(c => c.charAt(0).toUpperCase() + c.slice(1)).join(', ')}
@@ -418,8 +417,8 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
         </div>
 
         {/* Description Column */}
-        <div className="lg:col-span-7">
-          <p className="font-franklin font-black text-[2.2rem] lg:text-[2.2rem] leading-[0.95] tracking-[-0.05em] text-black" style={{ letterSpacing: '0.01rem' }} >
+        <div className="lg:col-span-8">
+          <p className="font-franklin font-black text-[2.2rem] lg:text-[2.2rem] leading-[0.95] tracking-[-0.05em] text-black" style={{ letterSpacing: '0.01rem', whiteSpace: 'pre-line' }} >
             {project.description || `${project.client} presents ${project.name}. Sound design, custom music supervisions and mixing by Aniedoabasi.`}
           </p>
         </div>

@@ -6,7 +6,11 @@ import { projects } from './data/db';
 import { homepageProjects } from './data/homepage_projects';
 import { triggerProjectHover, triggerDragMode } from './components/Cursor';
 
-const allHomepageProjects = [...projects, ...homepageProjects.filter(hp => !projects.some(p => p.uid === hp.uid))];
+const EXCLUDED_HOMEPAGE_UIDS = ['cedal-wood', 'world-smile-day'];
+const allHomepageProjects = [
+  ...projects.filter(p => !EXCLUDED_HOMEPAGE_UIDS.includes(p.uid)),
+  ...homepageProjects.filter(hp => !projects.some(p => p.uid === hp.uid) && !EXCLUDED_HOMEPAGE_UIDS.includes(hp.uid))
+];
 
 const isImageUrl = (url: string | null): boolean => {
   if (!url) return false;
@@ -99,6 +103,19 @@ function DesktopLanding() {
         }
       }, 0);
     }
+  }, [activeVideoUrl]);
+
+  // Update body class when background video plays
+  useEffect(() => {
+    const isVideoPlaying = activeVideoUrl ? !isImageUrl(activeVideoUrl) : false;
+    if (isVideoPlaying) {
+      document.body.classList.add('video-playing');
+    } else {
+      document.body.classList.remove('video-playing');
+    }
+    return () => {
+      document.body.classList.remove('video-playing');
+    };
   }, [activeVideoUrl]);
 
   // Dragging event handlers
@@ -368,6 +385,19 @@ function MobileLanding() {
         }
       }, 0);
     }
+  }, [activeVideoUrl]);
+
+  // Update body class when background video plays
+  useEffect(() => {
+    const isVideoPlaying = activeVideoUrl ? !isImageUrl(activeVideoUrl) : false;
+    if (isVideoPlaying) {
+      document.body.classList.add('video-playing');
+    } else {
+      document.body.classList.remove('video-playing');
+    }
+    return () => {
+      document.body.classList.remove('video-playing');
+    };
   }, [activeVideoUrl]);
 
   // Helper to update active project based on scroll/center position

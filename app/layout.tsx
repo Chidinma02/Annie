@@ -21,12 +21,28 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased select-none" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var hasLoaded = sessionStorage.getItem('fieldday_preloader_run');
+                  if (!hasLoaded) {
+                    document.documentElement.classList.add('preloader-loading');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-[#edece8] text-[#131313] font-sans antialiased overflow-x-hidden" suppressHydrationWarning>
         <Preloader />
         <Navigation />
         <Cursor />
         <TransitionWrapper>
-          <main className="flex-1 flex flex-col">
+          <main id="main-layout-content" className="flex-1 flex flex-col">
             {children}
           </main>
         </TransitionWrapper>

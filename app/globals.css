@@ -171,7 +171,7 @@ body {
   left: 0;
   position: absolute;
   width: 100%;
-  background-color: #fff;
+  background-color: currentColor;
   bottom: 0;
   height: 1.5px;
   transform: scaleX(0);
@@ -273,6 +273,12 @@ body {
   color: #ffffff !important;
 }
 
+body.video-playing .menu__logo,
+body.video-playing .menu__links--item a,
+body.video-playing .menu__links--item p {
+  color: #ffffff !important;
+}
+
 .l__menu.scrolled .menu__logo--img {
   filter: invert(1) !important;
 }
@@ -357,6 +363,12 @@ body {
   /* Initial clipped state (hidden/diagonal slash) */
   clip-path: polygon(0 0, 100% 0, 100% 0%, 0 0%) !important;
   transition: clip-path 0.8s cubic-bezier(0.76, 0, 0.24, 1) !important;
+}
+
+@media (max-width: 1023px) {
+  .selected__image {
+    display: none !important;
+  }
 }
 
 .selected__image.active {
@@ -450,4 +462,23 @@ body {
     width: 177.77vh; /* 16:9 ratio for portrait */
     height: 100vh;
   }
+}
+
+/* ---------------------------------------------------- */
+/* Preloader Blocker and Hydration Flash Prevention */
+/* ---------------------------------------------------- */
+/* Hide the preloader by default if the session storage indicates it has already run */
+#preloader-container {
+  display: none !important;
+}
+
+/* If the preloader needs to run (first visit in current session), display it and block normal layout content */
+.preloader-loading #preloader-container {
+  display: flex !important;
+}
+
+.preloader-loading #main-layout-content,
+.preloader-loading .l__menu,
+.preloader-loading #custom-cursor {
+  display: none !important;
 }

@@ -37,6 +37,17 @@ export default function Cursor() {
   const pathname = usePathname();
   const isLandingPage = pathname === '/';
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const [isVisible, setIsVisible] = useState(false);
   const [dragMode, setDragMode] = useState(false);
   const [preview, setPreview] = useState<{ url: string | null; name: string | null }>({
@@ -57,7 +68,7 @@ export default function Cursor() {
 
   // Toggle class on <html> to hide default cursor only on landing page
   useEffect(() => {
-    if (isLandingPage) {
+    if (isLandingPage && !isMobile) {
       document.documentElement.classList.add('cursor-none-page');
     } else {
       document.documentElement.classList.remove('cursor-none-page');
@@ -65,11 +76,11 @@ export default function Cursor() {
     return () => {
       document.documentElement.classList.remove('cursor-none-page');
     };
-  }, [isLandingPage]);
+  }, [isLandingPage, isMobile]);
 
   // Maintain active hover content states to let exit transitions play out
   useEffect(() => {
-    if (!isLandingPage) return;
+    if (!isLandingPage || isMobile) return;
     if (preview.url) {
       setActiveUrl(preview.url);
       setActiveName(preview.name);
@@ -80,11 +91,11 @@ export default function Cursor() {
       }, 800); // matches the 0.8s CSS transition duration
       return () => clearTimeout(timer);
     }
-  }, [preview.url, preview.name, isLandingPage]);
+  }, [preview.url, preview.name, isLandingPage, isMobile]);
 
   // Programmatic play trigger on activeUrl change to bypass browser autoplay blocks
   useEffect(() => {
-    if (!isLandingPage) return;
+    if (!isLandingPage || isMobile) return;
     if (hoverVideoRef.current && activeUrl && activeUrl.includes('.mp4')) {
       hoverVideoRef.current.load();
       const playPromise = hoverVideoRef.current.play();
@@ -94,10 +105,10 @@ export default function Cursor() {
         });
       }
     }
-  }, [activeUrl, isLandingPage]);
+  }, [activeUrl, isLandingPage, isMobile]);
 
   useEffect(() => {
-    if (!isLandingPage) return;
+    if (!isLandingPage || isMobile) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseCoords.current = { x: e.clientX, y: e.clientY };
@@ -169,50 +180,40 @@ export default function Cursor() {
       window.removeEventListener('cursor-drag', handleCustomDrag);
       cancelAnimationFrame(frameId);
     };
-  }, [isLandingPage]);
+  }, [isLandingPage, isMobile]);
 
-  if (!isLandingPage) return null;
+  if (!isLandingPage || isMobile) return null;
   if (!isVisible) return null;
 
   return (
     <>
-      {/* Custom Pointer (Pixelated Hand or Drag Badge) */}
+      {/* Custom Pointer (Circle or Drag Badge) */}
       <div
+        id="custom-cursor"
         ref={dotRef}
-        className="fixed pointer-events-none z-[100] flex items-center justify-center"
+        className="hidden lg:flex fixed pointer-events-none z-[100] items-center justify-center rounded-full bg-accent"
         style={{
           left: 0,
           top: 0,
-          width: dragMode ? '80px' : '24px',
-          height: dragMode ? '80px' : '24px',
-          transition: 'width 0.3s ease-out, height 0.3s ease-out',
+          width: dragMode ? '80px' : '12px',
+          height: dragMode ? '80px' : '12px',
+          transition: 'width 0.3s ease-out, height 0.3s ease-out, background-color 0.3s ease-out',
           transform: `translate3d(${mouseCoords.current.x}px, ${mouseCoords.current.y}px, 0) translate(-50%, -50%)`,
         }}
       >
-        {dragMode ? (
+        {dragMode && (
           <span 
             className="text-white font-medium text-[11px] uppercase tracking-wider select-none font-sans"
             style={{ pointerEvents: 'none' }}
           >
             DRAG
           </span>
-        ) : (
-          <img
-            src="/monstera-cursor.png"
-            alt="Monstera Cursor"
-            style={{
-              width: '32px',
-              height: '32px',
-              transform: 'translate(-4px, -4px)', // Align the pointer's hot spot precisely
-              pointerEvents: 'none',
-            }}
-          />
         )}
       </div>
 
       <div
         ref={previewRef}
-        className={`selected__image ${preview.url ? 'active' : ''}`}
+        className={`selected__image ${preview.url ? 'active' : ''} hidden lg:block`}
         style={{
           left: `${previewCoords.current.x + 220}px`,
           top: `${previewCoords.current.y - 120}px`,

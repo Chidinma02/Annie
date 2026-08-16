@@ -6,13 +6,14 @@ import { useRouter } from 'next/navigation';
 export default function Preloader() {
   const router = useRouter();
   const [count, setCount] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(true); // Default to true for SSR, then set to false if needed
+  const [isLoaded, setIsLoaded] = useState(false); // Default to false to avoid flashes
 
   useEffect(() => {
     // Check if the preloader has already run in the current browser session
     const hasLoaded = sessionStorage.getItem('fieldday_preloader_run');
     if (hasLoaded) {
       setIsLoaded(true);
+      document.documentElement.classList.remove('preloader-loading');
       return;
     }
 
@@ -31,6 +32,7 @@ export default function Preloader() {
         setTimeout(() => {
           setIsLoaded(true);
           sessionStorage.setItem('fieldday_preloader_run', 'true');
+          document.documentElement.classList.remove('preloader-loading');
           router.push('/');
         }, 300); // Small pause at 100%
       }
@@ -44,6 +46,7 @@ export default function Preloader() {
 
   return (
     <div
+      id="preloader-container"
       className="fixed inset-0 w-full h-full bg-[#131313] z-[999] flex flex-col justify-between p-6 md:p-12"
       style={{
         transform: count === 100 ? 'translateY(-100%)' : 'translateY(0%)',
