@@ -78,21 +78,7 @@ function WorkItemVideo({ src, isActive }: WorkItemVideoProps) {
 }
 
 const getLayoutConfig = (index: number) => {
-  const configs = [
-    { span: 'lg:col-span-3', aspect: 'aspect-[1.3/1]' }, // Row 1 Left: Wide
-    { span: 'lg:col-span-3', aspect: 'aspect-[1.3/1]' }, // Row 1 Right: Wide
-    
-    { span: 'lg:col-span-2', aspect: 'aspect-[3/4]' },   // Row 2 Left: Tall
-    { span: 'lg:col-span-2', aspect: 'aspect-[3/4]' },   // Row 2 Middle: Tall
-    { span: 'lg:col-span-2', aspect: 'aspect-[3/4]' },   // Row 2 Right: Tall
-    
-    { span: 'lg:col-span-2', aspect: 'aspect-[3/4]' },   // Row 3 Left: Tall
-    { span: 'lg:col-span-4', aspect: 'aspect-[1.6/1]' },  // Row 3 Right: Wide
-    
-    { span: 'lg:col-span-4', aspect: 'aspect-[1.6/1]' },  // Row 4 Left: Wide
-    { span: 'lg:col-span-2', aspect: 'aspect-[3/4]' },   // Row 4 Right: Tall
-  ];
-  return configs[index % configs.length];
+  return { span: '', aspect: 'aspect-[1.3/1]' };
 };
 
 function WorkList() {
@@ -208,7 +194,7 @@ function WorkList() {
       }}
     >
       <div
-        className="work__list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-x-[2.2rem] gap-y-[3.5rem] lg:gap-y-[5.5rem] items-start w-full pb-[4rem] lg:pb-[12rem] z-0"
+        className="work__list grid grid-cols-1 md:grid-cols-2 gap-x-[2.2rem] gap-y-[3.5rem] lg:gap-y-[5.5rem] items-start w-full pb-[4rem] lg:pb-[12rem] z-0"
         style={{
           marginTop: isMobile ? '10rem' : '18rem',
           paddingLeft: isMobile ? '2.5rem' : '8rem',
@@ -255,7 +241,7 @@ function WorkList() {
               {/* Title & Metadata */}
               <div className="work__title relative mt-6 px-2 overflow-hidden text-ellipsis whitespace-nowrap">
                 <h3 className="font-sans font-black text-[1.8rem] uppercase tracking-tight text-[#131313]">
-                  {project.client} <span className="text-[#858281] font-black mx-1">•</span> {project.name}
+                  {project.client}
                 </h3>
                 <p className="font-sans font-bold text-[1.2rem] uppercase tracking-wider text-[#858281] mt-2">
                   {project.categories.join(' / ')}

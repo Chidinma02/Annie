@@ -229,14 +229,29 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
 
   const flatImages: { url: string; text?: string | null }[] = [];
   if (project.images) {
+    const videos: { url: string; text?: string | null }[] = [];
+    const images: { url: string; text?: string | null }[] = [];
+
     project.images.forEach(img => {
       if (img.imageUrl) {
-        flatImages.push({ url: img.imageUrl, text: img.imageText });
+        const item = { url: img.imageUrl, text: img.imageText };
+        if (isYouTubeUrl(img.imageUrl) || !isImageUrl(img.imageUrl)) {
+          videos.push(item);
+        } else {
+          images.push(item);
+        }
       }
       if (img.secondImageUrl) {
-        flatImages.push({ url: img.secondImageUrl, text: img.secondImageText });
+        const item = { url: img.secondImageUrl, text: img.secondImageText };
+        if (isYouTubeUrl(img.secondImageUrl) || !isImageUrl(img.secondImageUrl)) {
+          videos.push(item);
+        } else {
+          images.push(item);
+        }
       }
     });
+
+    flatImages.push(...videos, ...images);
   }
 
   const heroVideoUrl = project.mainVideoUrl || (!isImageUrl(project.visualUrl) ? project.visualUrl : null);
@@ -386,11 +401,13 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
         }}
       >
         <div className="lg:col-span-1">
-          <p className="font-franklin font-black text-[1.2rem] leading-none tracking-[-0.01em] text-black">2024</p>
+          <p className="font-franklin font-black text-[1.2rem] leading-none tracking-[-0.01em] text-black">
+            {project.year || '2024'}
+          </p>
         </div>
         <div className="lg:col-span-11">
           <h3 className="font-franklin font-black text-[3.2rem] lg:text-[5.5rem] leading-[0.9] tracking-[-0.06em] text-black" style={{ letterSpacing: '0.01rem' }}>
-            {project.client.toUpperCase()} <span className="mx-2">•</span> {project.name}
+            {project.client.toUpperCase()}
           </h3>
         </div>
       </div>
@@ -417,10 +434,20 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
         </div>
 
         {/* Description Column */}
-        <div className="lg:col-span-8">
-          <p className="font-franklin font-black text-[2.2rem] lg:text-[2.2rem] leading-[0.95] tracking-[-0.05em] text-black" style={{ letterSpacing: '0.01rem', whiteSpace: 'pre-line' }} >
-            {project.description || `${project.client} presents ${project.name}. Sound design, custom music supervisions and mixing by Aniedoabasi.`}
-          </p>
+        <div className="lg:col-span-8 flex flex-col gap-6">
+          {(project.description || `${project.client} presents ${project.name}. Sound design, custom music supervisions and mixing by Aniedoabasi.`)
+            .split('\n')
+            .map((p) => p.trim())
+            .filter((p) => p !== '')
+            .map((para, i) => (
+              <p 
+                key={i} 
+                className="font-franklin font-black text-[2.2rem] lg:text-[2.2rem] leading-[1.8] tracking-[-0.05em] text-black" 
+                style={{ letterSpacing: '0.01rem' }} 
+              >
+                {para}
+              </p>
+            ))}
         </div>
       </div>
 

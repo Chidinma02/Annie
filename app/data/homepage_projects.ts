@@ -19,6 +19,7 @@ export interface Project {
   galleryColumns?: number;
   aspectRatio?: 'landscape' | 'portrait' | 'auto';
   galleryAspect?: 'square' | 'portrait' | 'landscape' | 'auto';
+  year?: string;
 }
 
 export interface AboutService {
