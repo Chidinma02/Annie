@@ -77,8 +77,16 @@ function WorkItemVideo({ src, isActive }: WorkItemVideoProps) {
   );
 }
 
-const getLayoutConfig = (index: number) => {
-  return { span: '', aspect: 'aspect-[1.3/1]' };
+const isProjectVideoGridItem = (project: typeof projects[0]) => {
+  return !project.thumbnailUrl && project.visualUrl && !isImageUrl(project.visualUrl);
+};
+
+const getLayoutConfig = (project: typeof projects[0]) => {
+  const isVideo = isProjectVideoGridItem(project);
+  return {
+    span: isVideo ? 'md:col-span-2' : 'md:col-span-1',
+    aspect: isVideo ? 'aspect-[16/9]' : 'aspect-[3/4]'
+  };
 };
 
 function WorkList() {
@@ -142,12 +150,60 @@ function WorkList() {
     return project.categories.includes(activeCategory);
   });
 
+  // Alternating row chunking: One row of videos (up to 2), then one row of images (up to 3)
+  const videoPool = filteredProjects.filter(p => isProjectVideoGridItem(p));
+  const imagePool = filteredProjects.filter(p => !isProjectVideoGridItem(p));
+
+  const displayProjects: typeof projects = [];
+  const layoutConfigs: { span: string; aspect: string }[] = [];
+
+  let videoIndex = 0;
+  let imageIndex = 0;
+  let isVideoRow = true;
+
+  while (videoIndex < videoPool.length || imageIndex < imagePool.length) {
+    if (isVideoRow && videoIndex < videoPool.length) {
+      // Chunk up to 2 videos for the video row
+      const remainingVideosCount = videoPool.length - videoIndex;
+      const rowVideosCount = Math.min(2, remainingVideosCount);
+      const rowVideos = videoPool.slice(videoIndex, videoIndex + rowVideosCount);
+      videoIndex += rowVideosCount;
+
+      rowVideos.forEach((project) => {
+        displayProjects.push(project);
+        layoutConfigs.push({
+          span: rowVideosCount === 1 ? 'md:col-span-12' : 'md:col-span-6',
+          aspect: 'aspect-[16/9]'
+        });
+      });
+      isVideoRow = false;
+    } else if (!isVideoRow && imageIndex < imagePool.length) {
+      // Chunk up to 3 images for the image row
+      const remainingImagesCount = imagePool.length - imageIndex;
+      const rowImagesCount = Math.min(3, remainingImagesCount);
+      const rowImages = imagePool.slice(imageIndex, imageIndex + rowImagesCount);
+      imageIndex += rowImagesCount;
+
+      rowImages.forEach((project) => {
+        displayProjects.push(project);
+        layoutConfigs.push({
+          span: rowImagesCount === 3 ? 'md:col-span-4' : rowImagesCount === 2 ? 'md:col-span-6' : 'md:col-span-12',
+          aspect: 'aspect-[3/4]'
+        });
+      });
+      isVideoRow = true;
+    } else {
+      // Toggle if one pool is exhausted
+      isVideoRow = !isVideoRow;
+    }
+  }
+
   // Initialize the first project's active state on mobile load
   useEffect(() => {
-    if (isMobile && filteredProjects.length > 0) {
-      setHoveredUid(filteredProjects[0].uid);
+    if (isMobile && displayProjects.length > 0) {
+      setHoveredUid(displayProjects[0].uid);
     }
-  }, [isMobile, filteredProjects]);
+  }, [isMobile, displayProjects]);
 
   // Track horizontal scroll of the row on mobile to highlight and play centered project video preview
   const handleScroll = () => {
@@ -182,7 +238,7 @@ function WorkList() {
       const timer = setTimeout(handleScroll, 200);
       return () => clearTimeout(timer);
     }
-  }, [isMobile, filteredProjects]);
+  }, [isMobile, displayProjects]);
 
   return (
     <div 
@@ -194,15 +250,16 @@ function WorkList() {
       }}
     >
       <div
-        className="work__list grid grid-cols-1 md:grid-cols-2 gap-x-[2.2rem] gap-y-[3.5rem] lg:gap-y-[5.5rem] items-start w-full pb-[4rem] lg:pb-[12rem] z-0"
+        className="work__list grid grid-cols-1 md:grid-cols-12 gap-x-[1.2rem] gap-y-[2.2rem] items-start w-full pb-[4rem] lg:pb-[12rem] z-0"
         style={{
           marginTop: isMobile ? '10rem' : '18rem',
-          paddingLeft: isMobile ? '2.5rem' : '8rem',
-          paddingRight: isMobile ? '2.5rem' : '8rem',
+          paddingLeft: '1.2rem',
+          paddingRight: '1.2rem',
+          gridAutoFlow: 'dense'
         }}
       >
-        {filteredProjects.map((project, index) => {
-          const { span, aspect } = getLayoutConfig(index);
+        {displayProjects.map((project, index) => {
+          const { span, aspect } = layoutConfigs[index];
 
           return (
             <Link

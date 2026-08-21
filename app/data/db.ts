@@ -56,7 +56,7 @@ export const projects: Project[] = [
     "visualUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786602406/IJGB_dcvfux.mp4",
     "mainVideoUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786602406/IJGB_dcvfux.mp4",
     "aspectRatio": "landscape",
-    "description": "At IJGB, I led the visual design across the brand’s always-on content and campaign work, from monthly Telegram creatives to graphics for the “Forex in 90 Seconds” series, infographics, and PR visuals. Beyond the day-to-day, I shaped moodboards and visual systems for brand campaigns, and delivered motion graphics, flyers, and merch design for one-off projects and launches.\n\nWorking across static design, motion, and photography, I became a go-to for the team on anything visual ,helping keep the brand consistent, campaigns sharper, and creative bottlenecks minimal.",
+    "description": "At IJGB, I led the visual design across the brand's always-on content and campaign work, educational infographics, and PR visuals. Beyond the day-to-day, I shaped moodboards and visual systems for brand campaigns. I delivered motion graphics, video edits, flyers, design presentation decks, and merch design for one-off projects and launches.Working across static design, motion, and photography, I became a go-to for the team on anything visual - helping keep the brand consistent, campaigns sharper, and creative bottlenecks minimal.",
     "credits": [
       "Sound Design & Mix: Aniedoabasi"
     ],
@@ -118,60 +118,6 @@ export const projects: Project[] = [
     ],
     "images": [
       {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/16_9 (2).png",
-        "imageText": null,
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combineall/final comp_20.png",
-        "imageText": null,
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combineall/final comp_30.png",
-        "imageText": null,
-        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combineall/final comp_40.png",
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combineall/final comp_50.png",
-        "imageText": null,
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combineall/final comp_80.png",
-        "imageText": null,
-        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combineall/final comp_120.png",
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combineall/final comp_130.png",
-        "imageText": null,
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combineall/final comp_140.png",
-        "imageText": null,
-        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combineall/final comp_150.png",
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combineall/final comp_180.png",
-        "imageText": null,
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combineall/final comp_190.png",
-        "imageText": null,
-        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combineall/final comp_220.png",
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combineall/final comp_230.png",
-        "imageText": null,
-        "secondImageText": null
-      },
-      {
         "imageUrl": "https://www.youtube.com/watch?v=OtbKI7sCIrU",
         "imageText": null,
         "secondImageText": null
@@ -183,21 +129,13 @@ export const projects: Project[] = [
     "client": "Tomi Juice",
     "name": "Tomi Juice",
     "categories": [
-      "Creative",
-      "Concept"
+      "Photographer, editor and stop motion animator"
     ],
     "thumbnailUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Tomi Juice/Copy of 1.png",
     "visualUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Tomi Juice/Copy of 1.png",
     "mainVideoUrl": null,
-    "description": "Nike's all-new C1TY is a tough, stylish shoe, built to keep up with those with shit to do and places to be. To turn heads in NYC, we staged a heist-worthy spectacle—\"leaking\" surveillance footage of an 18-ton truck packed with C1TYs getting tagged with graffiti and broken into. Then, we proceeded to crash the truck in a Lower East Side parking lot to hand the shoes out . The result? Pure NYC chaos: rowdy lines around the block, a few unimpressed cops, and a city full of go-getters laced up for whatever's next.",
-    "credits": [
-      "Made with Benson Wink for Nike",
-      "CD: Gabby Tama",
-      "Execution: Manual NYC, Recess Studios",
-      "Artist: Omi",
-      "Photography: Jacob Consenstein",
-      "Video: Yohan Yoon, Brandon Yoon, Yavez Anthonio"
-    ],
+    "description": "",
+    "credits": [],
     "galleryColumns": 3,
     "images": [
       {
@@ -235,8 +173,8 @@ export const projects: Project[] = [
     "categories": [
       "Photographer & Video Editor — JuicyWay Launch"
     ],
-    "thumbnailUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/23.png",
-    "visualUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/23.png",
+    "thumbnailUrl": null,
+    "visualUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1787106077/MOV_5230_1_btg8wz.mp4",
     "mainVideoUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1787106077/MOV_5230_1_btg8wz.mp4",
     "description": "Shot and edited web launch photography and staff headshots, then edited and color graded the campaign videos — delivering a consistent visual identity across the entire launch.",
     "credits": [
@@ -563,6 +501,7 @@ export const projects: Project[] = [
       }
     ]
   },
+  /*
   {
     "uid": "peperminkk",
     "client": "Peperminkk",
@@ -692,6 +631,7 @@ export const projects: Project[] = [
       }
     ]
   },
+  */
   /*
   {
     "uid": "elc",
@@ -712,6 +652,7 @@ export const projects: Project[] = [
     "images": []
   },
   */
+  /*
   {
     "uid": "dixtrict-26",
     "client": "Dixtrict 26",
@@ -772,6 +713,7 @@ export const projects: Project[] = [
       }
     ],
   },
+  */
   {
     "uid": "caveat-emptor",
     "client": "Caveat Emptor",
@@ -1247,6 +1189,7 @@ export const projects: Project[] = [
       }
     ]
   },
+  /*
   {
     "uid": "world-smile-day",
     "client": "Teelonis",
@@ -1272,6 +1215,7 @@ export const projects: Project[] = [
       }
     ]
   },
+  */
   // {
   //   "uid": "taylormade",
   //   "client": "TaylorMade",

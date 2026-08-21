@@ -59,19 +59,10 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
   const project = allProjects.find(p => p.uid === uid);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
-  const [hasStartedPlaying, setHasStartedPlaying] = useState(false);
-  const [overlayText, setOverlayText] = useState('Play');
+  const [hasStartedPlaying, setHasStartedPlaying] = useState(true);
+  const [overlayText, setOverlayText] = useState('Unmute');
 
-  useEffect(() => {
-    if (hasStartedPlaying) {
-      document.body.classList.add('video-playing');
-    } else {
-      document.body.classList.remove('video-playing');
-    }
-    return () => {
-      document.body.classList.remove('video-playing');
-    };
-  }, [hasStartedPlaying]);
+
 
   const [activeVideoUrl, setActiveVideoUrl] = useState<string | null>(null);
   const [hoveredUid, setHoveredUid] = useState<string | null>(null);
@@ -302,6 +293,12 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
       setHasStartedPlaying(true);
       setIsPlaying(true);
       setOverlayText('Mute');
+    } else {
+      // Toggle mute/unmute
+      const nextMuted = !isMuted;
+      videoRef.current.muted = nextMuted;
+      setIsMuted(nextMuted);
+      setOverlayText(nextMuted ? 'Unmute' : 'Mute');
     }
   };
 
@@ -327,7 +324,7 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
           {heroVideoUrl && (
             isYouTubeUrl(heroVideoUrl) ? (
               <iframe
-                src={getYouTubeEmbedUrl(heroVideoUrl, false) || ''}
+                src={getYouTubeEmbedUrl(heroVideoUrl, isMuted) || ''}
                 className={isLandscape ? "absolute inset-0 w-full h-full" : "w-full h-auto block"}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -341,9 +338,16 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
                 loop
                 muted={isMuted}
                 playsInline
+                autoPlay
                 controls={hasStartedPlaying}
               />
             )
+          )}
+
+          {hasStartedPlaying && heroVideoUrl && !isYouTubeUrl(heroVideoUrl) && (
+            <div className="absolute bottom-[2rem] right-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white font-franklin font-black text-[1.4rem] uppercase tracking-wider bg-black/40 px-4 py-2 rounded-full backdrop-blur-sm z-20 pointer-events-none">
+              {isMuted ? 'Tap to Unmute' : 'Mute'}
+            </div>
           )}
 
           {!hasStartedPlaying && (
@@ -452,26 +456,37 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
       </div>
 
       {/* ----------------- DYNAMIC GALLERY GRID ----------------- */}
-      {flatImages.length > 0 && (
-        <div
-          className="w-full bg-[#e7e4e3] z-10 relative"
-          style={{
-            paddingBottom: '10rem',
-            paddingLeft: isMobile ? '2rem' : '4rem',
-            paddingRight: isMobile ? '2rem' : '4rem'
-          }}
-        >
+      {flatImages.length > 0 && (() => {
+        const isSingleVideo = flatImages.length === 1 && !isImageUrl(flatImages[0].url);
+        return (
           <div
-            className="grid grid-cols-1 gap-6 lg:gap-8 w-full items-start"
+            className="w-full bg-[#e7e4e3] z-10 relative"
             style={{
-              gridTemplateColumns: isMobile ? '1fr' : `repeat(${project.galleryColumns || 2}, 1fr)`
+              paddingBottom: isSingleVideo ? '0' : '10rem',
+              paddingLeft: isSingleVideo ? 0 : (isMobile ? '2rem' : '4rem'),
+              paddingRight: isSingleVideo ? 0 : (isMobile ? '2rem' : '4rem')
             }}
           >
-            {flatImages.map((img, idx) => {
-              const { containerClass, mediaClass, videoClass } = getMediaClasses(true);
-              const useAspect = !!galleryAspectClass;
+            <div
+              className="grid grid-cols-1 gap-6 lg:gap-8 w-full items-start"
+              style={{
+                gridTemplateColumns: isSingleVideo ? '1fr' : (isMobile ? '1fr' : `repeat(${project.galleryColumns || 2}, 1fr)`)
+              }}
+            >
+              {flatImages.map((img, idx) => {
+                const { containerClass, mediaClass, videoClass } = getMediaClasses(true);
+                const isYT = isYouTubeUrl(img.url);
+                const useAspect = !!galleryAspectClass;
+                // Force 16/9 aspect ratio for YouTube embeds to prevent letterboxing/black bars
+                let finalContainerClass = isYT
+                  ? containerClass.replace(/aspect-\[[^\]]+\]/g, '').trim() + ' aspect-[16/9]'
+                  : containerClass;
+
+                if (isSingleVideo) {
+                  finalContainerClass = finalContainerClass.replace('rounded-[2rem]', 'rounded-none');
+                }
               return (
-                <div key={idx} className={containerClass}>
+                <div key={idx} className={finalContainerClass}>
                   {isImageUrl(img.url) ? (
                     <Image
                       src={decodeURI(img.url)}
@@ -508,9 +523,10 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
                 </div>
               );
             })}
+            </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
 
 
     </div>
