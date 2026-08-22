@@ -19,6 +19,111 @@ const isYouTubeUrl = (url: string | null): boolean => {
   return /youtube\.com|youtu\.be/i.test(url);
 };
 
+interface GridRowItem {
+  url: string;
+  text?: string | null;
+  aspect?: 'portrait' | 'landscape' | 'square' | null;
+  spanClass: string;
+  sizes: string;
+}
+
+function packGridItems(
+  items: { url: string; text?: string | null; aspect?: 'portrait' | 'landscape' | 'square' | null }[],
+  targetCols: number
+): GridRowItem[][] {
+  const rows: GridRowItem[][] = [];
+  const N = items.length;
+  if (N === 0) return rows;
+
+  let i = 0;
+  if (targetCols === 3) {
+    const rem = N % 3;
+    if (rem === 0) {
+      // All rows of 3
+      while (i < N) {
+        rows.push(items.slice(i, i + 3).map(img => ({
+          ...img,
+          spanClass: "md:col-span-4",
+          sizes: "(max-width: 768px) 100vw, 33vw"
+        })));
+        i += 3;
+      }
+    } else if (rem === 2) {
+      // N-2 items in rows of 3, last row of 2
+      while (i < N - 2) {
+        rows.push(items.slice(i, i + 3).map(img => ({
+          ...img,
+          spanClass: "md:col-span-4",
+          sizes: "(max-width: 768px) 100vw, 33vw"
+        })));
+        i += 3;
+      }
+      rows.push(items.slice(N - 2, N).map(img => ({
+        ...img,
+        spanClass: "md:col-span-6",
+        sizes: "(max-width: 768px) 100vw, 50vw"
+      })));
+    } else { // rem === 1
+      if (N >= 4) {
+        // N-4 items in rows of 3, last two rows of 2
+        while (i < N - 4) {
+          rows.push(items.slice(i, i + 3).map(img => ({
+            ...img,
+            spanClass: "md:col-span-4",
+            sizes: "(max-width: 768px) 100vw, 33vw"
+          })));
+          i += 3;
+        }
+        rows.push(items.slice(N - 4, N - 2).map(img => ({
+          ...img,
+          spanClass: "md:col-span-6",
+          sizes: "(max-width: 768px) 100vw, 50vw"
+        })));
+        rows.push(items.slice(N - 2, N).map(img => ({
+          ...img,
+          spanClass: "md:col-span-6",
+          sizes: "(max-width: 768px) 100vw, 50vw"
+        })));
+      } else { // N === 1
+        rows.push(items.slice(0, 1).map(img => ({
+          ...img,
+          spanClass: "md:col-span-12",
+          sizes: "(max-width: 768px) 100vw, 100vw"
+        })));
+      }
+    }
+  } else { // targetCols === 2
+    const rem = N % 2;
+    if (rem === 0) {
+      // All rows of 2
+      while (i < N) {
+        rows.push(items.slice(i, i + 2).map(img => ({
+          ...img,
+          spanClass: "md:col-span-6",
+          sizes: "(max-width: 768px) 100vw, 50vw"
+        })));
+        i += 2;
+      }
+    } else { // rem === 1
+      // N-1 items in rows of 2, last row of 1 (full-width)
+      while (i < N - 1) {
+        rows.push(items.slice(i, i + 2).map(img => ({
+          ...img,
+          spanClass: "md:col-span-6",
+          sizes: "(max-width: 768px) 100vw, 50vw"
+        })));
+        i += 2;
+      }
+      rows.push(items.slice(N - 1, N).map(img => ({
+        ...img,
+        spanClass: "md:col-span-12",
+        sizes: "(max-width: 768px) 100vw, 100vw"
+      })));
+    }
+  }
+  return rows;
+}
+
 const getYouTubeEmbedUrl = (url: string | null, muted = true): string | null => {
   if (!url) return null;
   const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
@@ -61,6 +166,7 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
   const [isMuted, setIsMuted] = useState(true);
   const [hasStartedPlaying, setHasStartedPlaying] = useState(true);
   const [overlayText, setOverlayText] = useState('Unmute');
+  const [imageAspects, setImageAspects] = useState<{ [url: string]: 'landscape' | 'portrait' | 'square' }>({});
 
 
 
@@ -218,14 +324,14 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
     );
   }
 
-  const flatImages: { url: string; text?: string | null }[] = [];
+  const flatImages: { url: string; text?: string | null; aspect?: 'portrait' | 'landscape' | 'square' | null }[] = [];
   if (project.images) {
-    const videos: { url: string; text?: string | null }[] = [];
-    const images: { url: string; text?: string | null }[] = [];
+    const videos: { url: string; text?: string | null; aspect?: 'portrait' | 'landscape' | 'square' | null }[] = [];
+    const images: { url: string; text?: string | null; aspect?: 'portrait' | 'landscape' | 'square' | null }[] = [];
 
     project.images.forEach(img => {
       if (img.imageUrl) {
-        const item = { url: img.imageUrl, text: img.imageText };
+        const item = { url: img.imageUrl, text: img.imageText, aspect: img.aspect };
         if (isYouTubeUrl(img.imageUrl) || !isImageUrl(img.imageUrl)) {
           videos.push(item);
         } else {
@@ -233,7 +339,7 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
         }
       }
       if (img.secondImageUrl) {
-        const item = { url: img.secondImageUrl, text: img.secondImageText };
+        const item = { url: img.secondImageUrl, text: img.secondImageText, aspect: img.secondAspect };
         if (isYouTubeUrl(img.secondImageUrl) || !isImageUrl(img.secondImageUrl)) {
           videos.push(item);
         } else {
@@ -245,8 +351,37 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
     flatImages.push(...videos, ...images);
   }
 
+  const flatImagesSerialized = flatImages.map(img => img.url).join(',');
+
+  useEffect(() => {
+    flatImages.forEach((img) => {
+      if (isImageUrl(img.url)) {
+        const tempImg = new window.Image();
+        tempImg.src = img.url;
+        tempImg.onload = () => {
+          let aspect: 'landscape' | 'portrait' | 'square' = 'portrait';
+          const ratio = tempImg.naturalWidth / tempImg.naturalHeight;
+          if (ratio > 1.05) {
+            aspect = 'landscape';
+          } else if (ratio < 0.95) {
+            aspect = 'portrait';
+          } else {
+            aspect = 'square';
+          }
+          setImageAspects((prev) => {
+            if (prev[img.url] === aspect) return prev;
+            return {
+              ...prev,
+              [img.url]: aspect
+            };
+          });
+        };
+      }
+    });
+  }, [flatImagesSerialized]);
+
   const heroVideoUrl = project.mainVideoUrl || (!isImageUrl(project.visualUrl) ? project.visualUrl : null);
-  const isLandscape = project.aspectRatio === 'landscape';
+  const isLandscape = project.aspectRatio === 'landscape' || !heroVideoUrl;
   const containerClass = isLandscape
     ? "w-full aspect-[16/10] lg:aspect-[2.2/1] overflow-hidden bg-[#dbdad7] relative cursor-pointer group"
     : "w-full relative cursor-pointer group";
@@ -321,75 +456,83 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
           className={containerClass}
           onClick={handleVideoClick}
         >
-          {heroVideoUrl && (
-            isYouTubeUrl(heroVideoUrl) ? (
-              <iframe
-                src={getYouTubeEmbedUrl(heroVideoUrl, isMuted) || ''}
-                className={isLandscape ? "absolute inset-0 w-full h-full" : "w-full h-auto block"}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                style={{ border: 0, width: '100%', aspectRatio: '16/9' }}
-              />
-            ) : (
-              <video
-                ref={videoRef}
-                src={heroVideoUrl}
-                className={childMediaClass}
-                loop
-                muted={isMuted}
-                playsInline
-                autoPlay
-                controls={hasStartedPlaying}
-              />
-            )
-          )}
-
-          {hasStartedPlaying && heroVideoUrl && !isYouTubeUrl(heroVideoUrl) && (
-            <div className="absolute bottom-[2rem] right-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white font-franklin font-black text-[1.4rem] uppercase tracking-wider bg-black/40 px-4 py-2 rounded-full backdrop-blur-sm z-20 pointer-events-none">
-              {isMuted ? 'Tap to Unmute' : 'Mute'}
-            </div>
-          )}
-
-          {!hasStartedPlaying && (
+          {heroVideoUrl ? (
             <>
-              {project.thumbnailUrl ? (
-                <Image
-                  src={decodeURI(project.thumbnailUrl)}
-                  alt={project.name}
-                  fill={!!heroVideoUrl || isLandscape}
-                  width={(!heroVideoUrl && !isLandscape) ? 1920 : undefined}
-                  height={(!heroVideoUrl && !isLandscape) ? 1080 : undefined}
-                  sizes="100vw"
-                  priority
-                  unoptimized={process.env.NODE_ENV === 'development'}
-                  className={heroVideoUrl ? "absolute inset-0 w-full h-full object-cover select-none pointer-events-none transition-opacity duration-500 z-10" : `${childMediaClass} select-none pointer-events-none transition-opacity duration-500`}
+              {isYouTubeUrl(heroVideoUrl) ? (
+                <iframe
+                  src={getYouTubeEmbedUrl(heroVideoUrl, isMuted) || ''}
+                  className={isLandscape ? "absolute inset-0 w-full h-full" : "w-full h-auto block"}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  style={{ border: 0, width: '100%', aspectRatio: '16/9' }}
                 />
-              ) : project.visualUrl && isImageUrl(project.visualUrl) ? (
-                <Image
-                  src={decodeURI(project.visualUrl)}
-                  alt={project.name}
-                  fill={!!heroVideoUrl || isLandscape}
-                  width={(!heroVideoUrl && !isLandscape) ? 1920 : undefined}
-                  height={(!heroVideoUrl && !isLandscape) ? 1080 : undefined}
-                  sizes="100vw"
-                  priority
-                  unoptimized={process.env.NODE_ENV === 'development'}
-                  className={heroVideoUrl ? "absolute inset-0 w-full h-full object-cover select-none pointer-events-none z-10" : `${childMediaClass} select-none pointer-events-none`}
+              ) : (
+                <video
+                  ref={videoRef}
+                  src={heroVideoUrl}
+                  className={childMediaClass}
+                  loop
+                  muted={isMuted}
+                  playsInline
+                  autoPlay
+                  controls={hasStartedPlaying}
                 />
-              ) : null}
+              )}
 
-              {/* Big Play button overlay in the center */}
-              {heroVideoUrl && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/35 transition-colors duration-300 z-20">
-                  <div className="w-20 h-20 lg:w-28 lg:h-28 rounded-full bg-white/90 flex items-center justify-center shadow-lg transition-transform duration-300">
-                    {/* Play Triangle SVG */}
-                    <svg className="w-8 h-8 lg:w-12 lg:h-12 text-black translate-x-1" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </div>
+              {hasStartedPlaying && !isYouTubeUrl(heroVideoUrl) && (
+                <div className="absolute bottom-[2rem] right-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white font-franklin font-black text-[1.4rem] uppercase tracking-wider bg-black/40 px-4 py-2 rounded-full backdrop-blur-sm z-20 pointer-events-none">
+                  {isMuted ? 'Tap to Unmute' : 'Mute'}
                 </div>
               )}
+
+              {!hasStartedPlaying && (
+                <>
+                  {project.thumbnailUrl ? (
+                    <Image
+                      src={decodeURI(project.thumbnailUrl)}
+                      alt={project.name}
+                      fill={true}
+                      sizes="100vw"
+                      priority
+                      unoptimized={process.env.NODE_ENV === 'development'}
+                      className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none transition-opacity duration-500 z-10"
+                    />
+                  ) : project.visualUrl && isImageUrl(project.visualUrl) ? (
+                    <Image
+                      src={decodeURI(project.visualUrl)}
+                      alt={project.name}
+                      fill={true}
+                      sizes="100vw"
+                      priority
+                      unoptimized={process.env.NODE_ENV === 'development'}
+                      className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none z-10"
+                    />
+                  ) : null}
+
+                  {/* Big Play button overlay in the center */}
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/35 transition-colors duration-300 z-20">
+                    <div className="w-20 h-20 lg:w-28 lg:h-28 rounded-full bg-white/90 flex items-center justify-center shadow-lg transition-transform duration-300">
+                      <svg className="w-8 h-8 lg:w-12 lg:h-12 text-black translate-x-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </>
+              )}
             </>
+          ) : (
+            // No video project: always render the static image
+            (project.visualUrl || project.thumbnailUrl) && (
+              <Image
+                src={decodeURI(project.visualUrl || project.thumbnailUrl || '')}
+                alt={project.name}
+                fill={true}
+                sizes="100vw"
+                priority
+                unoptimized={process.env.NODE_ENV === 'development'}
+                className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
+              />
+            )
           )}
         </div>
       </div>
@@ -400,8 +543,8 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
         style={{
           paddingTop: '11rem',
           paddingBottom: '1.5rem',
-          paddingLeft: isMobile ? '2rem' : '4rem',
-          paddingRight: isMobile ? '2rem' : '4rem'
+          paddingLeft: '1.2rem',
+          paddingRight: '1.2rem'
         }}
       >
         <div className="lg:col-span-1">
@@ -422,8 +565,8 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
         style={{
           paddingTop: '1.5rem',
           paddingBottom: '12rem',
-          paddingLeft: isMobile ? '2rem' : '4rem',
-          paddingRight: isMobile ? '2rem' : '4rem'
+          paddingLeft: '1.2rem',
+          paddingRight: '1.2rem'
         }}
       >
         {/* Spacer Column (Under Year) */}
@@ -439,7 +582,7 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
 
         {/* Description Column */}
         <div className="lg:col-span-8 flex flex-col gap-6">
-          {(project.description || `${project.client} presents ${project.name}. Sound design, custom music supervisions and mixing by Aniedoabasi.`)
+          {project.description === "" ? null : (project.description || `${project.client} presents ${project.name}. Sound design, custom music supervisions and mixing by Aniedoabasi.`)
             .split('\n')
             .map((p) => p.trim())
             .filter((p) => p !== '')
@@ -458,72 +601,204 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
       {/* ----------------- DYNAMIC GALLERY GRID ----------------- */}
       {flatImages.length > 0 && (() => {
         const isSingleVideo = flatImages.length === 1 && !isImageUrl(flatImages[0].url);
+
+        // Filter videos and images
+        const getAspect = (img: typeof flatImages[0]) => {
+          return img.aspect || imageAspects[img.url] || 'portrait';
+        };
+
+        const getImageClass = (url: string) => {
+          if (url.includes('20.png')) {
+            return "w-full aspect-[3/4] object-cover object-top block select-none pointer-events-none rounded-[2rem] border border-black/5";
+          }
+          return "w-full h-auto block select-none pointer-events-none rounded-[2rem] border border-black/5";
+        };
+
+        const videos = flatImages.filter(img => !isImageUrl(img.url));
+        const portraitImages = flatImages.filter(img => isImageUrl(img.url) && getAspect(img) === 'portrait');
+        const squareImages = flatImages.filter(img => isImageUrl(img.url) && getAspect(img) === 'square');
+        const landscapeImages = flatImages.filter(img => isImageUrl(img.url) && getAspect(img) === 'landscape');
+
+        // Pack images into rows that fill columns perfectly
+        const landscapeCols = project.landscapeColumns || 2;
+        const portraitRows = packGridItems(portraitImages, 3);
+        const squareRows = packGridItems(squareImages, 3);
+        const landscapeRows = packGridItems(landscapeImages, landscapeCols);
+
         return (
           <div
-            className="w-full bg-[#e7e4e3] z-10 relative"
+            className="w-full bg-[#e7e4e3] z-10 relative flex flex-col gap-6 lg:gap-8"
             style={{
               paddingBottom: isSingleVideo ? '0' : '10rem',
-              paddingLeft: isSingleVideo ? 0 : (isMobile ? '2rem' : '4rem'),
-              paddingRight: isSingleVideo ? 0 : (isMobile ? '2rem' : '4rem')
+              paddingLeft: isSingleVideo ? 0 : '1.2rem',
+              paddingRight: isSingleVideo ? 0 : '1.2rem'
             }}
           >
-            <div
-              className="grid grid-cols-1 gap-6 lg:gap-8 w-full items-start"
-              style={{
-                gridTemplateColumns: isSingleVideo ? '1fr' : (isMobile ? '1fr' : `repeat(${project.galleryColumns || 2}, 1fr)`)
-              }}
-            >
-              {flatImages.map((img, idx) => {
-                const { containerClass, mediaClass, videoClass } = getMediaClasses(true);
-                const isYT = isYouTubeUrl(img.url);
-                const useAspect = !!galleryAspectClass;
-                // Force 16/9 aspect ratio for YouTube embeds to prevent letterboxing/black bars
-                let finalContainerClass = isYT
-                  ? containerClass.replace(/aspect-\[[^\]]+\]/g, '').trim() + ' aspect-[16/9]'
-                  : containerClass;
+            {/* Render Videos */}
+            {videos.map((vid, idx) => {
+              const isYT = isYouTubeUrl(vid.url);
+              let finalContainerClass = `relative overflow-hidden rounded-[2rem] bg-[#dbdad7] border border-black/5 aspect-[16/9] w-full`;
+              if (isSingleVideo) {
+                finalContainerClass = finalContainerClass.replace('rounded-[2rem]', 'rounded-none');
+              }
+              const finalVideoClass = "absolute inset-0 w-full h-full object-cover";
 
-                if (isSingleVideo) {
-                  finalContainerClass = finalContainerClass.replace('rounded-[2rem]', 'rounded-none');
-                }
               return (
-                <div key={idx} className={finalContainerClass}>
-                  {isImageUrl(img.url) ? (
-                    <Image
-                      src={decodeURI(img.url)}
-                      alt="Project detail asset"
-                      fill={useAspect}
-                      width={!useAspect ? 1920 : undefined}
-                      height={!useAspect ? 1080 : undefined}
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      className={mediaClass}
-                      priority={idx < 2}
-                      unoptimized={process.env.NODE_ENV === 'development'}
+                <div key={`vid-${idx}`} className={finalContainerClass}>
+                  {isYT ? (
+                    <iframe
+                      src={getYouTubeEmbedUrl(vid.url) || ''}
+                      className={finalVideoClass}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      style={{ border: 0, width: '100%', height: '100%' }}
                     />
                   ) : (
-                    isYouTubeUrl(img.url) ? (
-                      <iframe
-                        src={getYouTubeEmbedUrl(img.url) || ''}
-                        className={videoClass.replace('object-cover', '')}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        style={{ border: 0, width: '100%', height: '100%', aspectRatio: '16/9' }}
-                      />
-                    ) : (
-                      <video
-                        src={img.url}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        controls
-                        className={videoClass}
-                      />
-                    )
+                    <video
+                      src={vid.url}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      controls
+                      className={finalVideoClass}
+                    />
                   )}
                 </div>
               );
             })}
-            </div>
+
+            {/* Render Landscape Image Rows (Landscape-First) */}
+            {project.galleryLayoutOrder === 'landscape-first' && landscapeRows.map((row, rIdx) => (
+              <div key={`land-row-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 w-full items-start">
+                {row.map((img, idx) => {
+                  return (
+                    <div key={`land-img-${idx}`} className={img.spanClass}>
+                      <Image
+                        src={decodeURI(img.url)}
+                        alt="Project detail asset"
+                        width={1920}
+                        height={1080}
+                        sizes={img.sizes}
+                        className={getImageClass(img.url)}
+                        priority={idx < 2}
+                        unoptimized={process.env.NODE_ENV === 'development'}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+
+            {/* Render Square Image Rows (Landscape-First) */}
+            {project.galleryLayoutOrder === 'landscape-first' && squareRows.map((row, rIdx) => (
+              <div key={`sq-row-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 w-full items-start">
+                {row.map((img, idx) => {
+                  return (
+                    <div key={`sq-img-${idx}`} className={img.spanClass}>
+                      <Image
+                        src={decodeURI(img.url)}
+                        alt="Project detail asset"
+                        width={1920}
+                        height={1080}
+                        sizes={img.sizes}
+                        className={getImageClass(img.url)}
+                        priority={idx < 2}
+                        unoptimized={process.env.NODE_ENV === 'development'}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+
+            {/* Render Portrait Image Rows (Landscape-First) */}
+            {project.galleryLayoutOrder === 'landscape-first' && portraitRows.map((row, rIdx) => (
+              <div key={`port-row-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 w-full items-start">
+                {row.map((img, idx) => {
+                  return (
+                    <div key={`port-img-${idx}`} className={img.spanClass}>
+                      <Image
+                        src={decodeURI(img.url)}
+                        alt="Project detail asset"
+                        width={1920}
+                        height={1080}
+                        sizes={img.sizes}
+                        className={getImageClass(img.url)}
+                        priority={idx < 2}
+                        unoptimized={process.env.NODE_ENV === 'development'}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+
+            {/* Render Portrait Image Rows (Portrait-First - Default) */}
+            {project.galleryLayoutOrder !== 'landscape-first' && portraitRows.map((row, rIdx) => (
+              <div key={`port-row-def-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 w-full items-start">
+                {row.map((img, idx) => {
+                  return (
+                    <div key={`port-img-def-${idx}`} className={img.spanClass}>
+                      <Image
+                        src={decodeURI(img.url)}
+                        alt="Project detail asset"
+                        width={1920}
+                        height={1080}
+                        sizes={img.sizes}
+                        className={getImageClass(img.url)}
+                        priority={idx < 2}
+                        unoptimized={process.env.NODE_ENV === 'development'}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+
+            {/* Render Square Image Rows (Portrait-First - Default) */}
+            {project.galleryLayoutOrder !== 'landscape-first' && squareRows.map((row, rIdx) => (
+              <div key={`sq-row-def-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 w-full items-start">
+                {row.map((img, idx) => {
+                  return (
+                    <div key={`sq-img-def-${idx}`} className={img.spanClass}>
+                      <Image
+                        src={decodeURI(img.url)}
+                        alt="Project detail asset"
+                        width={1920}
+                        height={1080}
+                        sizes={img.sizes}
+                        className={getImageClass(img.url)}
+                        priority={idx < 2}
+                        unoptimized={process.env.NODE_ENV === 'development'}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+
+            {/* Render Landscape Image Rows (Portrait-First - Default) */}
+            {project.galleryLayoutOrder !== 'landscape-first' && landscapeRows.map((row, rIdx) => (
+              <div key={`land-row-def-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 w-full items-start">
+                {row.map((img, idx) => {
+                  return (
+                    <div key={`land-img-def-${idx}`} className={img.spanClass}>
+                      <Image
+                        src={decodeURI(img.url)}
+                        alt="Project detail asset"
+                        width={1920}
+                        height={1080}
+                        sizes={img.sizes}
+                        className={getImageClass(img.url)}
+                        priority={idx < 2}
+                        unoptimized={process.env.NODE_ENV === 'development'}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
           </div>
         );
       })()}

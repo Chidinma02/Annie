@@ -3,6 +3,8 @@ export interface ProjectImage {
   imageText?: string | null;
   secondImageUrl?: string | null;
   secondImageText?: string | null;
+  aspect?: 'portrait' | 'landscape' | 'square' | null;
+  secondAspect?: 'portrait' | 'landscape' | 'square' | null;
 }
 
 export interface Project {
@@ -17,8 +19,10 @@ export interface Project {
   credits: string[];
   images: ProjectImage[];
   galleryColumns?: number;
+  landscapeColumns?: 2 | 3;
   aspectRatio?: 'landscape' | 'portrait' | 'auto';
   galleryAspect?: 'square' | 'portrait' | 'landscape' | 'auto';
+  galleryLayoutOrder?: 'landscape-first' | 'portrait-first';
   year?: string;
 }
 
@@ -175,6 +179,7 @@ export const projects: Project[] = [
     ],
     "thumbnailUrl": null,
     "visualUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1787106077/MOV_5230_1_btg8wz.mp4",
+    "landscapeColumns": 3,
     "mainVideoUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1787106077/MOV_5230_1_btg8wz.mp4",
     "description": "Shot and edited web launch photography and staff headshots, then edited and color graded the campaign videos — delivering a consistent visual identity across the entire launch.",
     "credits": [
@@ -182,85 +187,7 @@ export const projects: Project[] = [
     ],
     "images": [
       {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/1.png",
-        "imageText": null,
-        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/2.png",
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/3.png",
-        "imageText": null,
-        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combineall/4.png",
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combineall/5.png",
-        "imageText": null,
-        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combineall/6.png",
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combineall/7.png",
-        "imageText": null,
-        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combineall/8.png",
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/all/9.png",
-        "imageText": null,
-        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/10.jpg",
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/11.jpg",
-        "imageText": null,
-        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/12.jpg",
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/13.jpg",
-        "imageText": null,
-        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/14.jpg",
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/15.jpg",
-        "imageText": null,
-        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/16.jpg",
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/17.jpg",
-        "imageText": null,
-        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/18.jpg",
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/19.jpg",
-        "imageText": null,
-        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/20.jpg",
-        "secondImageText": null
-      },
-      {
         "imageUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786600516/Juicyway_headshots_jy1ngm.mp4",
-        "imageText": null,
-        "secondImageText": null
-      },
-
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/21.jpg",
-        "imageText": null,
-        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/22.png",
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/24.jpg",
-        "imageText": null,
-        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/25.jpg",
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combined-folder/26.PNG",
         "imageText": null,
         "secondImageText": null
       },
@@ -271,11 +198,6 @@ export const projects: Project[] = [
       },
       {
         "imageUrl": "https://www.youtube.com/watch?v=s2bZNjaQaHM",
-        "imageText": null,
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/all/Christmas ad cover.jpg",
         "imageText": null,
         "secondImageText": null
       },
@@ -294,19 +216,8 @@ export const projects: Project[] = [
         "imageText": null,
         "secondImageText": null
       },
-      // {
-      //   // "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Jordan_web.mp4",
-      //   "imageUrl": "https://www.youtube.com/watch?v=72boLm5qi-E",
-      //   "imageText": null,
-      //   "secondImageText": null
-      // },
       {
         "imageUrl": "https://www.youtube.com/watch?v=wieuniPRDYQ",
-        "imageText": null,
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/combineall/Test shoot.PNG",
         "imageText": null,
         "secondImageText": null
       },
@@ -314,6 +225,144 @@ export const projects: Project[] = [
         "imageUrl": "https://www.youtube.com/watch?v=MmnSLdfaftI",
         "imageText": null,
         "secondImageText": null
+      },
+      {
+        "imageUrl": "https://res.cloudinary.com/duyiomsdf/image/upload/v1787342995/s6_ta1ord.jpg",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "landscape"
+      },
+      {
+        "imageUrl": "https://res.cloudinary.com/duyiomsdf/image/upload/v1787342069/s8_saszre.jpg",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "portrait"
+      },
+      {
+        "imageUrl": "https://res.cloudinary.com/duyiomsdf/image/upload/v1787342505/s19_tihs5s.jpg",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "square"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/juicywayanother/10.png",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "portrait"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/juicywayanother/12.png",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "portrait"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/juicywayanother/13.png",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "portrait"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/juicywayanother/15.png",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "portrait"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/juicywayanother/16.png",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "portrait"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/juicywayanother/18.png",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "portrait"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/juicywayanother/19.png",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "landscape"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/juicywayanother/20.png",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "portrait"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/juicywayanother/22.png",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "portrait"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/juicywayanother/23.png",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "portrait"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/juicywayanother/25.png",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "square"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/juicywayanother/26.png",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "portrait"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/juicywayanother/27.png",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "portrait"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/juicywayanother/3.png",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "square"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/juicywayanother/4.png",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "portrait"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/juicywayanother/5.jpg",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "square"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/juicywayanother/6.png",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "landscape"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/juicywayanother/9.png",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "square"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/juicywayanother/j4r_.png",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "portrait"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/juicywayanother/j7%20pro.jpg",
+        "imageText": null,
+        "secondImageText": null,
+        "aspect": "landscape"
       }
     ]
   },
@@ -470,6 +519,7 @@ export const projects: Project[] = [
     ],
     "thumbnailUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Knonicles logos.png",
     "visualUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Knonicles logos.png",
+    "galleryLayoutOrder": "landscape-first",
     "mainVideoUrl": null,
     "description": "Sound design, custom music supervisions and mixing by Aniedoabasi.",
     "credits": [
@@ -724,6 +774,7 @@ export const projects: Project[] = [
     ],
     "thumbnailUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/AR Studio-2.jpg",
     "visualUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/AR Studio-2.jpg",
+    "galleryLayoutOrder": "portrait-first",
     "mainVideoUrl": null,
     "description": "Sound design, custom music supervisions and mixing by Aniedoabasi.",
     "credits": [
@@ -1004,8 +1055,8 @@ export const projects: Project[] = [
   },
   {
     "uid": "linen",
-    "client": "Linen",
-    "name": "Linen",
+    "client": "Linen vanille",
+    "name": "Linen vanille",
     "categories": [
       "Creative",
       "Concept"

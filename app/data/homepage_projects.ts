@@ -3,6 +3,8 @@ export interface ProjectImage {
   imageText?: string | null;
   secondImageUrl?: string | null;
   secondImageText?: string | null;
+  aspect?: 'portrait' | 'landscape' | 'square' | null;
+  secondAspect?: 'portrait' | 'landscape' | 'square' | null;
 }
 
 export interface Project {
@@ -17,8 +19,10 @@ export interface Project {
   credits: string[];
   images: ProjectImage[];
   galleryColumns?: number;
+  landscapeColumns?: 2 | 3;
   aspectRatio?: 'landscape' | 'portrait' | 'auto';
   galleryAspect?: 'square' | 'portrait' | 'landscape' | 'auto';
+  galleryLayoutOrder?: 'landscape-first' | 'portrait-first';
   year?: string;
 }
 
