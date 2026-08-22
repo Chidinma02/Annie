@@ -381,7 +381,7 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
   }, [flatImagesSerialized]);
 
   const heroVideoUrl = project.mainVideoUrl || (!isImageUrl(project.visualUrl) ? project.visualUrl : null);
-  const isLandscape = project.aspectRatio === 'landscape' || !heroVideoUrl;
+  const isLandscape = project.aspectRatio ? project.aspectRatio === 'landscape' : !heroVideoUrl;
   const containerClass = isLandscape
     ? "w-full aspect-[16/10] lg:aspect-[2.2/1] overflow-hidden bg-[#dbdad7] relative cursor-pointer group"
     : "w-full relative cursor-pointer group";
@@ -627,7 +627,7 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
 
         return (
           <div
-            className="w-full bg-[#e7e4e3] z-10 relative flex flex-col gap-6 lg:gap-8"
+            className="w-full bg-[#e7e4e3] z-10 relative flex flex-col gap-y-[2.2rem]"
             style={{
               paddingBottom: isSingleVideo ? '0' : '10rem',
               paddingLeft: isSingleVideo ? 0 : '1.2rem',
@@ -670,7 +670,7 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
 
             {/* Render Landscape Image Rows (Landscape-First) */}
             {project.galleryLayoutOrder === 'landscape-first' && landscapeRows.map((row, rIdx) => (
-              <div key={`land-row-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 w-full items-start">
+              <div key={`land-row-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-x-[1.2rem] gap-y-[2.2rem] w-full items-start">
                 {row.map((img, idx) => {
                   return (
                     <div key={`land-img-${idx}`} className={img.spanClass}>
@@ -692,7 +692,7 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
 
             {/* Render Square Image Rows (Landscape-First) */}
             {project.galleryLayoutOrder === 'landscape-first' && squareRows.map((row, rIdx) => (
-              <div key={`sq-row-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 w-full items-start">
+              <div key={`sq-row-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-x-[1.2rem] gap-y-[2.2rem] w-full items-start">
                 {row.map((img, idx) => {
                   return (
                     <div key={`sq-img-${idx}`} className={img.spanClass}>
@@ -714,7 +714,7 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
 
             {/* Render Portrait Image Rows (Landscape-First) */}
             {project.galleryLayoutOrder === 'landscape-first' && portraitRows.map((row, rIdx) => (
-              <div key={`port-row-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 w-full items-start">
+              <div key={`port-row-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-x-[1.2rem] gap-y-[2.2rem] w-full items-start">
                 {row.map((img, idx) => {
                   return (
                     <div key={`port-img-${idx}`} className={img.spanClass}>
@@ -736,7 +736,7 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
 
             {/* Render Portrait Image Rows (Portrait-First - Default) */}
             {project.galleryLayoutOrder !== 'landscape-first' && portraitRows.map((row, rIdx) => (
-              <div key={`port-row-def-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 w-full items-start">
+              <div key={`port-row-def-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-x-[1.2rem] gap-y-[2.2rem] w-full items-start">
                 {row.map((img, idx) => {
                   return (
                     <div key={`port-img-def-${idx}`} className={img.spanClass}>
@@ -758,7 +758,7 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
 
             {/* Render Square Image Rows (Portrait-First - Default) */}
             {project.galleryLayoutOrder !== 'landscape-first' && squareRows.map((row, rIdx) => (
-              <div key={`sq-row-def-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 w-full items-start">
+              <div key={`sq-row-def-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-x-[1.2rem] gap-y-[2.2rem] w-full items-start">
                 {row.map((img, idx) => {
                   return (
                     <div key={`sq-img-def-${idx}`} className={img.spanClass}>
@@ -780,7 +780,7 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
 
             {/* Render Landscape Image Rows (Portrait-First - Default) */}
             {project.galleryLayoutOrder !== 'landscape-first' && landscapeRows.map((row, rIdx) => (
-              <div key={`land-row-def-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 w-full items-start">
+              <div key={`land-row-def-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-x-[1.2rem] gap-y-[2.2rem] w-full items-start">
                 {row.map((img, idx) => {
                   return (
                     <div key={`land-img-def-${idx}`} className={img.spanClass}>

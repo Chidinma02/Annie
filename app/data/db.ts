@@ -374,8 +374,8 @@ export const projects: Project[] = [
       "Creative",
       "Concept"
     ],
-    "thumbnailUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/18.png",
-    "visualUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/18.png",
+    "thumbnailUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/7.png",
+    "visualUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/7.png",
     "mainVideoUrl": null,
     "description": "Sound design, custom music supervisions and mixing by Aniedoabasi.",
     "credits": [
@@ -383,57 +383,74 @@ export const projects: Project[] = [
     ],
     "images": [
       {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/1.png",
-        "imageText": null,
-        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/2.png",
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/3.png",
-        "imageText": null,
-        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/4.png",
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/5.png",
-        "imageText": null,
-        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/6.png",
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/7.png",
-        "imageText": null,
-        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/8.png",
-        "secondImageText": null
-      },
-      {
         "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/9.png",
         "imageText": null,
+        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/15.png",
+        "secondImageText": null,
+        "aspect": "portrait",
+        "secondAspect": "portrait"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/4.png",
+        "imageText": null,
+        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/5.png",
+        "secondImageText": null,
+        "aspect": "portrait",
+        "secondAspect": "portrait"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/14.png",
+        "imageText": null,
+        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/1.png",
+        "secondImageText": null,
+        "aspect": "portrait",
+        "secondAspect": "portrait"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/2.png",
+        "imageText": null,
+        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/3.png",
+        "secondImageText": null,
+        "aspect": "portrait",
+        "secondAspect": "portrait"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/6.png",
+        "imageText": null,
+        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/18.png",
+        "secondImageText": null,
+        "aspect": "portrait",
+        "secondAspect": "square"
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/8.png",
+        "imageText": null,
         "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/10.png",
-        "secondImageText": null
+        "secondImageText": null,
+        "aspect": "portrait",
+        "secondAspect": "square"
       },
       {
         "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/11.png",
         "imageText": null,
         "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/12.png",
-        "secondImageText": null
+        "secondImageText": null,
+        "aspect": "square",
+        "secondAspect": "square"
       },
       {
         "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/13.png",
         "imageText": null,
-        "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/14.png",
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/15.png",
-        "imageText": null,
         "secondImageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/16.png",
-        "secondImageText": null
+        "secondImageText": null,
+        "aspect": "square",
+        "secondAspect": "square"
       },
       {
         "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/17.png",
         "imageText": null,
-        "secondImageText": null
+        "secondImageText": null,
+        "aspect": "square"
       }
     ]
   },
@@ -1064,6 +1081,7 @@ export const projects: Project[] = [
     "thumbnailUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/41.png",
     "visualUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/41.png",
     "mainVideoUrl": null,
+    "aspectRatio": "portrait",
     "description": "Sound design, custom music supervisions and mixing by Aniedoabasi.",
     "credits": [
       "Sound Design & Mix: Aniedoabasi"
