@@ -83,93 +83,6 @@ export const projects: Project[] = [
     ]
   },
   {
-    "uid": "huddle",
-    "client": "Huddle",
-    "name": "The Return",
-    "categories": [
-      "Creative",
-      "Concept"
-    ],
-    "thumbnailUrl": null,
-    "visualUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786646285/The_Return_of_the_Huddle_cp_z4l2xc.mp4",
-    "mainVideoUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786646285/The_Return_of_the_Huddle_cp_z4l2xc.mp4",
-    "aspectRatio": "landscape",
-    "description": "Sound design and mix for The Return of the Huddle by Aniedoabasi.",
-    "credits": [
-      "Sound Design & Mix: Aniedoabasi"
-    ],
-    "images": []
-  },
-  {
-    "uid": "world-cup",
-    "client": "World Cup",
-    "name": "Dream",
-    "categories": [
-      "Production designer and Colorist"
-    ],
-    "thumbnailUrl": null,
-    "visualUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/v1787106716/World_Cup_Dreams_2_1_oyhsfi.mp4",
-    "mainVideoUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/v1787106716/World_Cup_Dreams_2_1_oyhsfi.mp4",
-    "aspectRatio": "landscape",
-    "description": "Nike's all-new C1TY is a tough, stylish shoe, built to keep up with those with shit to do and places to be. To turn heads in NYC, we staged a heist-worthy spectacle—\"leaking\" surveillance footage of an 18-ton truck packed with C1TYs getting tagged with graffiti and broken into. Then, we proceeded to crash the truck in a Lower East Side parking lot to hand the shoes out . The result? Pure NYC chaos: rowdy lines around the block, a few unimpressed cops, and a city full of go-getters laced up for whatever's next.",
-    "credits": [
-      "Made with Benson Wink for Nike",
-      "CD: Gabby Tama",
-      "Execution: Manual NYC, Recess Studios",
-      "Artist: Omi",
-      "Photography: Jacob Consenstein",
-      "Video: Yohan Yoon, Brandon Yoon, Yavez Anthonio"
-    ],
-    "images": [
-      {
-        "imageUrl": "https://www.youtube.com/watch?v=OtbKI7sCIrU",
-        "imageText": null,
-        "secondImageText": null
-      }
-    ]
-  },
-  {
-    "uid": "tomi-juice",
-    "client": "Tomi Juice",
-    "name": "Tomi Juice",
-    "categories": [
-      "Photographer, editor and stop motion animator"
-    ],
-    "thumbnailUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Tomi Juice/Copy of 1.png",
-    "visualUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Tomi Juice/Copy of 1.png",
-    "mainVideoUrl": null,
-    "description": "",
-    "credits": [],
-    "galleryColumns": 3,
-    "images": [
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Tomi Juice/Copy of 2.png",
-        "imageText": null,
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Tomi Juice/Copy of 3.png",
-        "imageText": null,
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Tomi Juice/Copy of 4.png",
-        "imageText": null,
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Tomi Juice/Copy of 5.png",
-        "imageText": null,
-        "secondImageText": null
-      },
-      {
-        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/6_web.mp4",
-        "imageText": null,
-        "secondImageText": null
-      }
-    ]
-  },
-  {
     "uid": "juicyway",
     "year": "2024",
     "client": "Juicyway",
@@ -367,6 +280,94 @@ export const projects: Project[] = [
     ]
   },
   {
+    "uid": "world-cup",
+    "client": "World Cup",
+    "name": "Dream",
+    "categories": [
+      "Production designer and Colorist"
+    ],
+    "thumbnailUrl": null,
+    "visualUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/v1787106716/World_Cup_Dreams_2_1_oyhsfi.mp4",
+    "mainVideoUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/v1787106716/World_Cup_Dreams_2_1_oyhsfi.mp4",
+    "aspectRatio": "landscape",
+    "description": "Nike's all-new C1TY is a tough, stylish shoe, built to keep up with those with shit to do and places to be. To turn heads in NYC, we staged a heist-worthy spectacle—\"leaking\" surveillance footage of an 18-ton truck packed with C1TYs getting tagged with graffiti and broken into. Then, we proceeded to crash the truck in a Lower East Side parking lot to hand the shoes out . The result? Pure NYC chaos: rowdy lines around the block, a few unimpressed cops, and a city full of go-getters laced up for whatever's next.",
+    "credits": [
+      "Made with Benson Wink for Nike",
+      "CD: Gabby Tama",
+      "Execution: Manual NYC, Recess Studios",
+      "Artist: Omi",
+      "Photography: Jacob Consenstein",
+      "Video: Yohan Yoon, Brandon Yoon, Yavez Anthonio"
+    ],
+    "images": [
+      {
+        "imageUrl": "https://www.youtube.com/watch?v=OtbKI7sCIrU",
+        "imageText": null,
+        "secondImageText": null
+      }
+    ]
+  },
+  {
+    "uid": "tomi-juice",
+    "client": "Tomi Juice",
+    "name": "Tomi Juice",
+    "categories": [
+      "Photographer, editor and stop motion animator"
+    ],
+    "thumbnailUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Tomi Juice/Copy of 1.png",
+    "visualUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Tomi Juice/Copy of 1.png",
+    "mainVideoUrl": null,
+    "description": "",
+    "credits": [],
+    "galleryColumns": 3,
+    "images": [
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Tomi Juice/Copy of 2.png",
+        "imageText": null,
+        "secondImageText": null
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Tomi Juice/Copy of 3.png",
+        "imageText": null,
+        "secondImageText": null
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Tomi Juice/Copy of 4.png",
+        "imageText": null,
+        "secondImageText": null
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Tomi Juice/Copy of 5.png",
+        "imageText": null,
+        "secondImageText": null
+      },
+      {
+        "imageUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/6_web.mp4",
+        "imageText": null,
+        "secondImageText": null
+      }
+    ]
+  },
+  {
+    "uid": "huddle",
+    "client": "Huddle",
+    "name": "The Return",
+    "categories": [
+      "Creative",
+      "Concept"
+    ],
+    "thumbnailUrl": null,
+    "visualUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786646285/The_Return_of_the_Huddle_cp_z4l2xc.mp4",
+    "mainVideoUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786646285/The_Return_of_the_Huddle_cp_z4l2xc.mp4",
+    "aspectRatio": "landscape",
+    "description": "",
+    // "description": "Sound design and mix for The Return of the Huddle by Aniedoabasi.",
+    "credits": [
+      "Sound Design & Mix: Aniedoabasi"
+    ],
+    "images": []
+  },
+  {
     "uid": "hingees",
     "client": "Hingees",
     "name": "Hingees",
@@ -377,7 +378,7 @@ export const projects: Project[] = [
     "thumbnailUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/7.png",
     "visualUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Hingees/7.png",
     "mainVideoUrl": null,
-    "description": "Sound design, custom music supervisions and mixing by Aniedoabasi.",
+    "description": "",
     "credits": [
       "Sound Design & Mix: Aniedoabasi"
     ],
@@ -465,7 +466,7 @@ export const projects: Project[] = [
     "thumbnailUrl": null,
     "visualUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Gtfw_web.mp4",
     "mainVideoUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Gtfw_web.mp4",
-    "description": "Sound design, custom music supervisions and mixing by Aniedoabasi.",
+    "description": "",
     "credits": [
       "Sound Design & Mix: Aniedoabasi"
     ],
@@ -482,7 +483,7 @@ export const projects: Project[] = [
     "thumbnailUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Voss Water/s2n.png",
     "visualUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Voss Water/s2n.png",
     "mainVideoUrl": null,
-    "description": "Sound design, custom music supervisions and mixing by Aniedoabasi.",
+    "description": "",
     "credits": [
       "Sound Design & Mix: Aniedoabasi"
     ],
@@ -507,7 +508,7 @@ export const projects: Project[] = [
     "mainVideoUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786652791/Seabreeze_cp_bfmo9y.mp4",
     "aspectRatio": "landscape",
     "galleryAspect": "portrait",
-    "description": "Sound design, custom music supervisions and mixing by Aniedoabasi.",
+    "description": "",
     "credits": [
       "Sound Design & Mix: Aniedoabasi"
     ],
@@ -538,7 +539,7 @@ export const projects: Project[] = [
     "visualUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Knonicles logos.png",
     "galleryLayoutOrder": "landscape-first",
     "mainVideoUrl": null,
-    "description": "Sound design, custom music supervisions and mixing by Aniedoabasi.",
+    "description": "",
     "credits": [
       "Sound Design & Mix: Aniedoabasi"
     ],
@@ -793,7 +794,7 @@ export const projects: Project[] = [
     "visualUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/AR Studio-2.jpg",
     "galleryLayoutOrder": "portrait-first",
     "mainVideoUrl": null,
-    "description": "Sound design, custom music supervisions and mixing by Aniedoabasi.",
+    "description": "",
     "credits": [
       "Sound Design & Mix: Aniedoabasi"
     ],
@@ -1082,7 +1083,7 @@ export const projects: Project[] = [
     "visualUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/41.png",
     "mainVideoUrl": null,
     "aspectRatio": "portrait",
-    "description": "Sound design, custom music supervisions and mixing by Aniedoabasi.",
+    "description": "",
     "credits": [
       "Sound Design & Mix: Aniedoabasi"
     ],
@@ -1227,7 +1228,7 @@ export const projects: Project[] = [
     "visualUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Cedal_wood_web.mp4",
     "mainVideoUrl": "https://pub-524a2ba2f653439e91b69fe3c7368ebb.r2.dev/Cedal_wood_web.mp4",
     "aspectRatio": "landscape",
-    "description": "Sound design, custom music supervisions and mixing by Aniedoabasi.",
+    "description": "",
     "credits": [
       "Sound Design & Mix: Aniedoabasi"
     ],
@@ -1245,7 +1246,7 @@ export const projects: Project[] = [
     "visualUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786646485/DHK_2_trl5tc.mp4",
     "mainVideoUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786646485/DHK_2_trl5tc.mp4",
     "aspectRatio": "landscape",
-    "description": "Sound design, custom music supervisions and mixing by Aniedoabasi.",
+    "description": "",
     "credits": [
       "Sound Design & Mix: Aniedoabasi"
     ],
