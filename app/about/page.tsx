@@ -34,15 +34,18 @@ export default function AboutPage() {
           <p className="font-bold">Hi, I'm Aniedoabasi.</p>
 
           <p>
-            Born and raised in Nigeria, I moved to pursue my passion in creative sound arts, foley, and custom music production. My artistic journey began with deep listening, recording organic sounds, and designing immersive soundscapes.
+            Born and raised in Lagos, Nigeria. My artistic pursuits began with photography, where I discovered a love for capturing compelling stories for brands and campaigns, products, and interesting people while working as an event photographer.
+
           </p>
 
           <p>
-            Over time, this passion expanded, drawing me into adjacent creative fields like original music supervisions, commercial sound design, stereo mixing, and voice ADR. What started as an exploration of raw sonic storytelling grew into a holistic practice of creating across multiple disciplines, each enriching the other.
+            Over time, this passion expanded, drawing me into adjacent creative fields like creative direction, video editing, stop motion animation, art direction, production design, cinematography, design, and other creative entrepreneurial pursuits. What started as an exploration of visual storytelling grew into a holistic practice of creating across multiple disciplines, each enriching the other.
+
           </p>
 
           <p>
-            Over the past nine years, my studio practice has been a catalyst for my creative output, shaping me into the multidisciplinary artist and sound engineer today.
+            Over the past six years, this creative space has been  a catalyst for my creative journey, shaping me into the multidisciplinary artist I am today.
+
           </p>
         </div>
 
@@ -53,11 +56,15 @@ export default function AboutPage() {
           <div className="flex flex-col gap-3">
             <h4 className="font-bold">Services:</h4>
             <ul className="flex flex-col gap-1.5 list-none pl-0">
-              <li>• Creative Sound Design & Foley</li>
-              <li>• Original Music & Sonic Branding</li>
-              <li>• Stereo & Surround Mixing for TV & Film</li>
-              <li>• Voice Casting & ADR Recording</li>
-              <li>• Music Supervision & Licensing</li>
+              <li>• Creative Direction</li>
+              <li>• Colour grading</li>
+
+              <li>• Photography </li>
+              <li>• Cinematography</li>
+              <li>• Graphic</li>
+              <li>• Production Design ,and Set Design</li>
+              <li>• Brand design</li>
+              <li>• Consultation & Creative Strategy</li>
             </ul>
           </div>
 
@@ -78,7 +85,7 @@ export default function AboutPage() {
         <div className="flex flex-col items-center gap-6">
           <div className="w-full max-w-[340px] border border-black overflow-hidden bg-white shadow-sm">
             <img
-              src="/Images/info_portrait.png"
+              src="https://res.cloudinary.com/duyiomsdf/image/upload/v1788077102/WhatsApp_Image_2026-08-27_at_19.22.07_bgwona.jpg"
               alt="Aniedoabasi Portrait"
               className="w-full h-auto block grayscale"
             />
@@ -86,11 +93,16 @@ export default function AboutPage() {
           <div className="text-center font-sans text-[1.45rem] leading-[1.6] text-[#131313]">
             <p className="font-bold">Bookings and Inquiries:</p>
             <a
-              href="mailto:hello@aniedoabasi.com"
+              href="mailto:helloaniedorichard@gmail.com"
               className="hover:opacity-75 transition-opacity underline decoration-black/20"
             >
-              hello@aniedoabasi.com
+              helloaniedorichard@gmail.com
             </a>
+            <p
+              className="hover:opacity-75 transition-opacity underline decoration-black/20"
+            >
+              +234 913 4829 205
+            </p>
           </div>
         </div>
 

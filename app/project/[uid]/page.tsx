@@ -162,10 +162,11 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
 
   // Find the current project
   const project = allProjects.find(p => p.uid === uid);
+  const heroVideoUrl = project ? (project.mainVideoUrl || (!isImageUrl(project.visualUrl) ? project.visualUrl : null)) : null;
   const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   const [hasStartedPlaying, setHasStartedPlaying] = useState(true);
-  const [overlayText, setOverlayText] = useState('Unmute');
+  const [overlayText, setOverlayText] = useState('Mute');
   const [imageAspects, setImageAspects] = useState<{ [url: string]: 'landscape' | 'portrait' | 'square' }>({});
 
 
@@ -228,6 +229,22 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  // Handle autoplay sound policy
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = isMuted;
+      videoRef.current.play().catch((err) => {
+        // If unmuted autoplay fails, play muted instead
+        console.warn("Unmuted autoplay failed, falling back to muted:", err);
+        setIsMuted(true);
+        if (videoRef.current) {
+          videoRef.current.muted = true;
+          videoRef.current.play().catch(() => {});
+        }
+      });
+    }
+  }, [heroVideoUrl, isMuted]);
 
   // Mouse drag refs and states
   const isDraggingRef = useRef(false);
@@ -380,7 +397,6 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
     });
   }, [flatImagesSerialized]);
 
-  const heroVideoUrl = project.mainVideoUrl || (!isImageUrl(project.visualUrl) ? project.visualUrl : null);
   const isLandscape = project.aspectRatio ? project.aspectRatio === 'landscape' : !heroVideoUrl;
   const containerClass = isLandscape
     ? "w-full aspect-[16/10] lg:aspect-[2.2/1] overflow-hidden bg-[#dbdad7] relative cursor-pointer group"
@@ -658,7 +674,7 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
                       src={vid.url}
                       autoPlay
                       loop
-                      muted
+                      muted={isMuted}
                       playsInline
                       controls
                       className={finalVideoClass}
