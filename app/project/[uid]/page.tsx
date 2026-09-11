@@ -14,6 +14,11 @@ const isImageUrl = (url: string | null): boolean => {
   return /\.(jpeg|jpg|gif|png|webp|svg)($|\?)/i.test(url);
 };
 
+const isVideoFile = (url: string | null): boolean => {
+  if (!url) return false;
+  return /\.(mp4|webm|ogg)($|\?)/i.test(url);
+};
+
 const isYouTubeUrl = (url: string | null): boolean => {
   if (!url) return false;
   return /youtube\.com|youtu\.be/i.test(url);
@@ -37,60 +42,14 @@ function packGridItems(
 
   let i = 0;
   if (targetCols === 3) {
-    const rem = N % 3;
-    if (rem === 0) {
-      // All rows of 3
-      while (i < N) {
-        rows.push(items.slice(i, i + 3).map(img => ({
-          ...img,
-          spanClass: "md:col-span-4",
-          sizes: "(max-width: 768px) 100vw, 33vw"
-        })));
-        i += 3;
-      }
-    } else if (rem === 2) {
-      // N-2 items in rows of 3, last row of 2
-      while (i < N - 2) {
-        rows.push(items.slice(i, i + 3).map(img => ({
-          ...img,
-          spanClass: "md:col-span-4",
-          sizes: "(max-width: 768px) 100vw, 33vw"
-        })));
-        i += 3;
-      }
-      rows.push(items.slice(N - 2, N).map(img => ({
+    while (i < N) {
+      const chunk = items.slice(i, i + 3);
+      rows.push(chunk.map(img => ({
         ...img,
-        spanClass: "md:col-span-6",
-        sizes: "(max-width: 768px) 100vw, 50vw"
+        spanClass: "md:col-span-4",
+        sizes: "(max-width: 768px) 100vw, 33vw"
       })));
-    } else { // rem === 1
-      if (N >= 4) {
-        // N-4 items in rows of 3, last two rows of 2
-        while (i < N - 4) {
-          rows.push(items.slice(i, i + 3).map(img => ({
-            ...img,
-            spanClass: "md:col-span-4",
-            sizes: "(max-width: 768px) 100vw, 33vw"
-          })));
-          i += 3;
-        }
-        rows.push(items.slice(N - 4, N - 2).map(img => ({
-          ...img,
-          spanClass: "md:col-span-6",
-          sizes: "(max-width: 768px) 100vw, 50vw"
-        })));
-        rows.push(items.slice(N - 2, N).map(img => ({
-          ...img,
-          spanClass: "md:col-span-6",
-          sizes: "(max-width: 768px) 100vw, 50vw"
-        })));
-      } else { // N === 1
-        rows.push(items.slice(0, 1).map(img => ({
-          ...img,
-          spanClass: "md:col-span-12",
-          sizes: "(max-width: 768px) 100vw, 100vw"
-        })));
-      }
+      i += 3;
     }
   } else { // targetCols === 2
     const rem = N % 2;
@@ -372,7 +331,7 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
 
   useEffect(() => {
     flatImages.forEach((img) => {
-      if (isImageUrl(img.url)) {
+      if (isImageUrl(img.url) && !isVideoFile(img.url)) {
         const tempImg = new window.Image();
         tempImg.src = img.url;
         tempImg.onload = () => {
@@ -618,7 +577,6 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
       {flatImages.length > 0 && (() => {
         const isSingleVideo = flatImages.length === 1 && !isImageUrl(flatImages[0].url);
 
-        // Filter videos and images
         const getAspect = (img: typeof flatImages[0]) => {
           return img.aspect || imageAspects[img.url] || 'portrait';
         };
@@ -630,16 +588,56 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
           return "w-full h-auto block select-none pointer-events-none rounded-[2rem] border border-black/5";
         };
 
-        const videos = flatImages.filter(img => !isImageUrl(img.url));
-        const portraitImages = flatImages.filter(img => isImageUrl(img.url) && getAspect(img) === 'portrait');
-        const squareImages = flatImages.filter(img => isImageUrl(img.url) && getAspect(img) === 'square');
-        const landscapeImages = flatImages.filter(img => isImageUrl(img.url) && getAspect(img) === 'landscape');
+        const chunkArray = <T,>(arr: T[], size: number): T[][] => {
+          const res: T[][] = [];
+          for (let i = 0; i < arr.length; i += size) {
+            res.push(arr.slice(i, i + size));
+          }
+          return res;
+        };
 
-        // Pack images into rows that fill columns perfectly
-        const landscapeCols = project.landscapeColumns || 2;
+        const videos = flatImages.filter(img => isYouTubeUrl(img.url) || (!isImageUrl(img.url) && !img.url.toLowerCase().includes('juicyway_headshots')));
+        const mediaAssets = flatImages.filter(img => isImageUrl(img.url) || img.url.toLowerCase().includes('juicyway_headshots'));
+
+        const portraitImages = mediaAssets.filter(img => getAspect(img) === 'portrait');
+        const squareImages = mediaAssets.filter(img => getAspect(img) === 'square');
+        const landscapeImages = mediaAssets.filter(img => getAspect(img) === 'landscape');
+
+        const landscapeCols = project.landscapeColumns || 3;
         const portraitRows = packGridItems(portraitImages, 3);
         const squareRows = packGridItems(squareImages, 3);
         const landscapeRows = packGridItems(landscapeImages, landscapeCols);
+
+        const videoRows = packGridItems(videos, 2);
+
+        const renderMediaItem = (img: GridRowItem, idx: number, priority = false) => {
+          const isVid = isVideoFile(img.url);
+          return (
+            <div key={idx} className={img.spanClass}>
+              {isVid ? (
+                <video
+                  src={img.url}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className={getImageClass(img.url)}
+                />
+              ) : (
+                <Image
+                  src={decodeURI(img.url)}
+                  alt="Project detail asset"
+                  width={1920}
+                  height={1080}
+                  sizes={img.sizes}
+                  className={getImageClass(img.url)}
+                  priority={priority}
+                  unoptimized={process.env.NODE_ENV === 'development'}
+                />
+              )}
+            </div>
+          );
+        };
 
         return (
           <div
@@ -651,168 +649,84 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
             }}
           >
             {/* Render Videos */}
-            {videos.map((vid, idx) => {
-              const isYT = isYouTubeUrl(vid.url);
-              let finalContainerClass = `relative overflow-hidden rounded-[2rem] bg-[#dbdad7] border border-black/5 aspect-[16/9] w-full`;
-              if (isSingleVideo) {
-                finalContainerClass = finalContainerClass.replace('rounded-[2rem]', 'rounded-none');
-              }
-              const finalVideoClass = "absolute inset-0 w-full h-full object-cover";
+            {videoRows.map((row, rIdx) => (
+              <div key={`vid-row-${rIdx}`} className={isSingleVideo ? "w-full" : "grid grid-cols-1 md:grid-cols-12 gap-x-[1.2rem] gap-y-[2.2rem] w-full"}>
+                {row.map((vid, idx) => {
+                  const isYT = isYouTubeUrl(vid.url);
+                  let finalContainerClass = `relative overflow-hidden rounded-[2rem] bg-[#dbdad7] border border-black/5 aspect-[16/9] w-full`;
+                  if (isSingleVideo) {
+                    finalContainerClass = finalContainerClass.replace('rounded-[2rem]', 'rounded-none');
+                  }
+                  const finalVideoClass = "absolute inset-0 w-full h-full object-cover";
 
-              return (
-                <div key={`vid-${idx}`} className={finalContainerClass}>
-                  {isYT ? (
-                    <iframe
-                      src={getYouTubeEmbedUrl(vid.url) || ''}
-                      className={finalVideoClass}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      style={{ border: 0, width: '100%', height: '100%' }}
-                    />
-                  ) : (
-                    <video
-                      src={vid.url}
-                      autoPlay
-                      loop
-                      muted={isMuted}
-                      playsInline
-                      controls
-                      className={finalVideoClass}
-                    />
-                  )}
-                </div>
-              );
-            })}
+                  return (
+                    <div key={`vid-${idx}`} className={isSingleVideo ? "w-full" : vid.spanClass}>
+                      <div className={finalContainerClass}>
+                        {isYT ? (
+                          <iframe
+                            src={getYouTubeEmbedUrl(vid.url, true) || ''}
+                            className={finalVideoClass}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            style={{ border: 0, width: '100%', height: '100%' }}
+                          />
+                        ) : (
+                          <video
+                            src={vid.url}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            controls
+                            className={finalVideoClass}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
 
             {/* Render Landscape Image Rows (Landscape-First) */}
             {project.galleryLayoutOrder === 'landscape-first' && landscapeRows.map((row, rIdx) => (
               <div key={`land-row-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-x-[1.2rem] gap-y-[2.2rem] w-full items-start">
-                {row.map((img, idx) => {
-                  return (
-                    <div key={`land-img-${idx}`} className={img.spanClass}>
-                      <Image
-                        src={decodeURI(img.url)}
-                        alt="Project detail asset"
-                        width={1920}
-                        height={1080}
-                        sizes={img.sizes}
-                        className={getImageClass(img.url)}
-                        priority={idx < 2}
-                        unoptimized={process.env.NODE_ENV === 'development'}
-                      />
-                    </div>
-                  );
-                })}
+                {row.map((img, idx) => renderMediaItem(img, idx, idx < 2))}
               </div>
             ))}
 
             {/* Render Square Image Rows (Landscape-First) */}
             {project.galleryLayoutOrder === 'landscape-first' && squareRows.map((row, rIdx) => (
               <div key={`sq-row-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-x-[1.2rem] gap-y-[2.2rem] w-full items-start">
-                {row.map((img, idx) => {
-                  return (
-                    <div key={`sq-img-${idx}`} className={img.spanClass}>
-                      <Image
-                        src={decodeURI(img.url)}
-                        alt="Project detail asset"
-                        width={1920}
-                        height={1080}
-                        sizes={img.sizes}
-                        className={getImageClass(img.url)}
-                        priority={idx < 2}
-                        unoptimized={process.env.NODE_ENV === 'development'}
-                      />
-                    </div>
-                  );
-                })}
+                {row.map((img, idx) => renderMediaItem(img, idx, idx < 2))}
               </div>
             ))}
 
             {/* Render Portrait Image Rows (Landscape-First) */}
             {project.galleryLayoutOrder === 'landscape-first' && portraitRows.map((row, rIdx) => (
               <div key={`port-row-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-x-[1.2rem] gap-y-[2.2rem] w-full items-start">
-                {row.map((img, idx) => {
-                  return (
-                    <div key={`port-img-${idx}`} className={img.spanClass}>
-                      <Image
-                        src={decodeURI(img.url)}
-                        alt="Project detail asset"
-                        width={1920}
-                        height={1080}
-                        sizes={img.sizes}
-                        className={getImageClass(img.url)}
-                        priority={idx < 2}
-                        unoptimized={process.env.NODE_ENV === 'development'}
-                      />
-                    </div>
-                  );
-                })}
+                {row.map((img, idx) => renderMediaItem(img, idx, idx < 2))}
               </div>
             ))}
 
             {/* Render Portrait Image Rows (Portrait-First - Default) */}
             {project.galleryLayoutOrder !== 'landscape-first' && portraitRows.map((row, rIdx) => (
               <div key={`port-row-def-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-x-[1.2rem] gap-y-[2.2rem] w-full items-start">
-                {row.map((img, idx) => {
-                  return (
-                    <div key={`port-img-def-${idx}`} className={img.spanClass}>
-                      <Image
-                        src={decodeURI(img.url)}
-                        alt="Project detail asset"
-                        width={1920}
-                        height={1080}
-                        sizes={img.sizes}
-                        className={getImageClass(img.url)}
-                        priority={idx < 2}
-                        unoptimized={process.env.NODE_ENV === 'development'}
-                      />
-                    </div>
-                  );
-                })}
+                {row.map((img, idx) => renderMediaItem(img, idx, idx < 2))}
               </div>
             ))}
 
             {/* Render Square Image Rows (Portrait-First - Default) */}
             {project.galleryLayoutOrder !== 'landscape-first' && squareRows.map((row, rIdx) => (
               <div key={`sq-row-def-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-x-[1.2rem] gap-y-[2.2rem] w-full items-start">
-                {row.map((img, idx) => {
-                  return (
-                    <div key={`sq-img-def-${idx}`} className={img.spanClass}>
-                      <Image
-                        src={decodeURI(img.url)}
-                        alt="Project detail asset"
-                        width={1920}
-                        height={1080}
-                        sizes={img.sizes}
-                        className={getImageClass(img.url)}
-                        priority={idx < 2}
-                        unoptimized={process.env.NODE_ENV === 'development'}
-                      />
-                    </div>
-                  );
-                })}
+                {row.map((img, idx) => renderMediaItem(img, idx, idx < 2))}
               </div>
             ))}
 
             {/* Render Landscape Image Rows (Portrait-First - Default) */}
             {project.galleryLayoutOrder !== 'landscape-first' && landscapeRows.map((row, rIdx) => (
               <div key={`land-row-def-${rIdx}`} className="grid grid-cols-1 md:grid-cols-12 gap-x-[1.2rem] gap-y-[2.2rem] w-full items-start">
-                {row.map((img, idx) => {
-                  return (
-                    <div key={`land-img-def-${idx}`} className={img.spanClass}>
-                      <Image
-                        src={decodeURI(img.url)}
-                        alt="Project detail asset"
-                        width={1920}
-                        height={1080}
-                        sizes={img.sizes}
-                        className={getImageClass(img.url)}
-                        priority={idx < 2}
-                        unoptimized={process.env.NODE_ENV === 'development'}
-                      />
-                    </div>
-                  );
-                })}
+                {row.map((img, idx) => renderMediaItem(img, idx, idx < 2))}
               </div>
             ))}
           </div>
