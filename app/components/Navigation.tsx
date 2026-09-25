@@ -46,22 +46,6 @@ export default function Navigation() {
           <Link href="/work" className="menu__link--label menu-link-active">
             Work
           </Link>
-          <div
-            className={`menu__links--sub hidden lg:flex lg:flex-col gap-2 transition-opacity duration-300 ${isWorkDefaultVisible
-              ? 'opacity-100 pointer-events-auto'
-              : 'opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto'
-              }`}
-          >
-            {/* <Link href="/work?category=sound-design" className="sublinks--item menu-link-active">
-              Sound Design
-            </Link>
-            <Link href="/work?category=music" className="sublinks--item menu-link-active">
-              Music
-            </Link>
-            <Link href="/work?category=mix" className="sublinks--item menu-link-active">
-              Mix
-            </Link> */}
-          </div>
         </div>
 
         {/* About Link */}
@@ -69,14 +53,6 @@ export default function Navigation() {
           <Link href="/about" className="menu__link--label menu-link-active">
             Info
           </Link>
-          {/* <p
-            className={`menu__links--sub hidden lg:block transition-opacity duration-300 select-none ${isAboutDefaultVisible
-              ? 'opacity-100 pointer-events-auto'
-              : 'opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto'
-              }`}
-          >
-            We are a creative sound and music company
-          </p> */}
         </div>
 
       </div>

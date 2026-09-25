@@ -557,19 +557,21 @@ export default function ProjectDetailPage(props: { params: Promise<{ uid: string
 
         {/* Description Column */}
         <div className="lg:col-span-8 flex flex-col gap-6">
-          {project.description === "" ? null : (project.description || `${project.client} presents ${project.name}. Sound design, custom music supervisions and mixing by Aniedoabasi.`)
-            .split('\n')
-            .map((p) => p.trim())
-            .filter((p) => p !== '')
-            .map((para, i) => (
-              <p 
-                key={i} 
-                className="font-franklin font-black text-[2.2rem] lg:text-[2.2rem] leading-[1.8] tracking-[-0.05em] text-black" 
-                style={{ letterSpacing: '0.01rem' }} 
-              >
-                {para}
-              </p>
-            ))}
+          {project.description
+            ? project.description
+                .split('\n')
+                .map((p) => p.trim())
+                .filter((p) => p !== '')
+                .map((para, i) => (
+                  <p 
+                    key={i} 
+                    className="font-franklin font-black text-[2.2rem] lg:text-[2.2rem] leading-[1.8] tracking-[-0.05em] text-black" 
+                    style={{ letterSpacing: '0.01rem' }} 
+                  >
+                    {para}
+                  </p>
+                ))
+            : null}
         </div>
       </div>
 

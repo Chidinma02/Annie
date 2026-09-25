@@ -7,10 +7,10 @@ import TransitionWrapper from "./components/TransitionWrapper";
 
 export const metadata: Metadata = {
   title: "Aniedoabasi",
-  description: "Award winning sound design, music, and mix for brands and directors across the globe.",
+  description: "Multidisciplinary visual artist, creative director, photographer, and cinematographer.",
   openGraph: {
     title: "Aniedoabasi",
-    description: "Welcome to Aniedoabasi. We are an award winning creative sound and music company.",
+    description: "Welcome to Aniedoabasi. Multidisciplinary visual artist, creative director, photographer, and cinematographer.",
   }
 };
 

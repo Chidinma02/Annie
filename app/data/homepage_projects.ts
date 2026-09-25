@@ -16,7 +16,7 @@ export interface Project {
   visualUrl: string | null;
   mainVideoUrl: string | null;
   description: string;
-  credits: string[];
+  credits?: string[];
   images: ProjectImage[];
   galleryColumns?: number;
   landscapeColumns?: 2 | 3;
@@ -48,43 +48,6 @@ export interface AboutData {
 }
 
 export const homepageProjects: Project[] = [
-  // {
-  //   "uid": "nike-so-win",
-  //   "client": "Knige",
-  //   "name": "So Win.",
-  //   "categories": [
-  //     "mix",
-  //     "sound-design"
-  //   ],
-  //   "thumbnailUrl": "/Images/football/headers/16_9.png",
-  //   "visualUrl": "/Images/football/headers/16_9.png",
-  //   "mainVideoUrl": null,
-  //   "description": "There’s one guarantee in sport.  You’ll be told you can’t do it. So do it anyway.   You can’t win. So Win.",
-  //   "credits": [
-  //     "Agency: Wieden + Kennedy",
-  //     "Director: Kim Gehrig",
-  //     "Sound Design + Mix: Noah Woodburn",
-  //     "Awards: Super Bowl LIX - Super Clio Winner"
-  //   ],
-  //   "images": [
-  //     {
-  //       "imageUrl": "https://images.prismic.io/field-day-sound/Z7_3257c43Q3gSb9_SoWin2SMall.jpg?auto=format,compress?auto=compress,format",
-  //       "imageText": null,
-  //       "secondImageText": null
-  //     },
-  //     {
-  //       "imageUrl": "https://images.prismic.io/field-day-sound/Z7_33Z7c43Q3gSb__SoWin4Small.jpg?auto=format,compress?auto=compress,format",
-  //       "imageText": null,
-  //       "secondImageUrl": "https://images.prismic.io/field-day-sound/Z7_33J7c43Q3gSb-_SoWin3small.jpg?auto=format,compress?auto=compress,format",
-  //       "secondImageText": null
-  //     },
-  //     {
-  //       "imageUrl": "https://images.prismic.io/field-day-sound/Z7_32p7c43Q3gSb8_SoWin1Small.jpg?auto=format,compress?auto=compress,format",
-  //       "imageText": null,
-  //       "secondImageText": null
-  //     }
-  //   ]
-  // },
   // {
   //   "uid": "taylormade",
   //   "client": "TaylorMade",
@@ -141,40 +104,6 @@ export const homepageProjects: Project[] = [
   //     },
   //     {
   //       "imageUrl": "https://images.prismic.io/field-day-sound/aRzWcGGnmrmGp__S_Yeti_Face.jpg?auto=format,compress?auto=compress,format",
-  //       "imageText": null,
-  //       "secondImageText": null
-  //     }
-  //   ]
-  // },
-  // {
-  //   "uid": "nikewhatthefootball",
-  //   "client": "Nike",
-  //   "name": "What The Football",
-  //   "categories": [
-  //     "mix",
-  //     "sound-design"
-  //   ],
-  //   "thumbnailUrl": "/image/17.png",
-  //   "visualUrl": "https://field-day-sound.cdn.prismic.io/field-day-sound/3fe455e9-fb8f-4ff0-85e3-238b913e1a42_SHORT_Anthem_Titled_WEB_16x9_HD_LF_No+Slate_1+copy.mp4",
-  //   "mainVideoUrl": "https://field-day-sound.cdn.prismic.io/field-day-sound/2efb37d0-dc7c-4c68-be9a-c23e5260286f_NKVR3076000H_Anthem_Titled_WEB_16x9_HD_LF_No+Slate_1.mp4",
-  //   "description": "Nike set’s the stage for a new world order in Women’s soccer, celebrating soccer heroes past and present ahead of the 2023 FIFA Women’s World Cup",
-  //   "credits": [
-  //     "Agency: Wieden + Kennedy",
-  //     "Director: ALASKA",
-  //     "Sound Design & Mix: Noah Woodburn, Morgan Johnson, Natalie Huizenga",
-  //     "Awards: AICP Audio Mix over :60",
-  //     "Awards: Clio Sports Film Craft: Sound Design",
-  //     "Awards: The One Show - Music & Sound Craft: Sound Design",
-  //     "Awards: The One Show - Music & Sound Craft: Mix"
-  //   ],
-  //   "images": [
-  //     {
-  //       "imageUrl": "https://images.prismic.io/field-day-sound/d92d07ff-e92e-4246-9434-600a7ea5d5d8_what+the+football.jpg?auto=compress,format",
-  //       "imageText": null,
-  //       "secondImageText": null
-  //     },
-  //     {
-  //       "imageUrl": "https://images.prismic.io/field-day-sound/9bc71159-1fa3-468b-af16-4acafff41710_what+the+football+2.jpg?auto=compress,format",
   //       "imageText": null,
   //       "secondImageText": null
   //     }
@@ -271,38 +200,6 @@ export const homepageProjects: Project[] = [
   //   ]
   // },
   // {
-  //   "uid": "amiabadperson",
-  //   "client": "Nike",
-  //   "name": "Am I A Bad Person",
-  //   "categories": [
-  //     "mix",
-  //     "sound-design"
-  //   ],
-  //   "thumbnailUrl": "https://images.prismic.io/field-day-sound/Zs63okaF0TcGJcxH_OLY_0010_Frame128.png?auto=format,compress?auto=compress,format",
-  //   "visualUrl": "https://field-day-sound.cdn.prismic.io/field-day-sound/Zs66mUaF0TcGJcx1_short_nike_AmIABadPerson.mp4",
-  //   "mainVideoUrl": "https://field-day-sound.cdn.prismic.io/field-day-sound/Zs63vUaF0TcGJcxK_LONG_ANTHEM_AM_I_A_BAD_PERSON_WEB_16x9_Titled_HD_2min.mp4",
-  //   "description": "You can’t win them all, but you should sure as hell try. Bring on the odds, play like you mean it. Because if you don’t want to win, congrats. You’ve already lost. ",
-  //   "credits": [
-  //     "Agency: Wieden + Kennedy",
-  //     "Director: Kim Gehrig",
-  //     "Mix: Noah Woodburn",
-  //     "Sound Design: Morgan Johnson, Noah Woodburn"
-  //   ],
-  //   "images": [
-  //     {
-  //       "imageUrl": "https://images.prismic.io/field-day-sound/Zs6470aF0TcGJcxd_BadPerson1.jpg?auto=format,compress?auto=compress,format",
-  //       "imageText": null,
-  //       "secondImageUrl": "https://images.prismic.io/field-day-sound/Zs648EaF0TcGJcxe_BadPerson2.jpg?auto=format,compress?auto=compress,format",
-  //       "secondImageText": null
-  //     },
-  //     {
-  //       "imageUrl": "https://images.prismic.io/field-day-sound/Zs648UaF0TcGJcxf_BadPerson3.jpg?auto=format,compress?auto=compress,format",
-  //       "imageText": null,
-  //       "secondImageText": null
-  //     }
-  //   ]
-  // },
-  // {
   //   "uid": "manscaped",
   //   "client": "Manscaped",
   //   "name": "Hair Ballad",
@@ -331,75 +228,6 @@ export const homepageProjects: Project[] = [
   //       "imageUrl": "https://images.prismic.io/field-day-sound/acMRQ5GXnQHGY7pu_windowsmall.jpg?auto=format,compress?auto=compress,format",
   //       "imageText": null,
   //       "secondImageUrl": "https://images.prismic.io/field-day-sound/acMRQJGXnQHGY7pt_tubsmall.jpg?auto=format,compress?auto=compress,format",
-  //       "secondImageText": null
-  //     }
-  //   ]
-  // },
-  // {
-  //   "uid": "nike-we-are-all-witnesses",
-  //   "client": "Nike",
-  //   "name": "We Are Witnesses",
-  //   "categories": [
-  //     "music"
-  //   ],
-  //   "thumbnailUrl": "https://images.prismic.io/field-day-sound/8a38b94c-e52b-4fe6-87f7-db5e3aa9deb4_Witnesses+Screen+Shot.jpg?auto=compress,format",
-  //   "visualUrl": "https://field-day-sound.cdn.prismic.io/field-day-sound/4c0a5efd-114d-4158-993a-16b57d2b24a2_short_Nike+-+We+Are+All+Witnesses_Rev.mp4",
-  //   "mainVideoUrl": "https://field-day-sound.cdn.prismic.io/field-day-sound/37ada51d-5201-4a65-bb21-0b3f5d4d50e6_full_Nike+-+We+Are+All+Witnesses_Rev.mp4",
-  //   "description": "20 years later, we are who we’ve always been – Witnesses to Lebron James and his never-ending greatness.",
-  //   "credits": [
-  //     "Agency: Wieden Kennedy",
-  //     "Original Music: Aniedoabasi",
-  //     "Sound Design: Morgan Johnson",
-  //     "Mix: Noah Woodburn"
-  //   ],
-  //   "images": [
-  //     {
-  //       "imageUrl": "https://images.prismic.io/field-day-sound/5b548594-f7f5-49b4-9b92-57935501825e_Nike+-+We+Are+Witnesses_01.jpg?auto=compress,format",
-  //       "imageText": null,
-  //       "secondImageText": null
-  //     },
-  //     {
-  //       "imageUrl": "https://images.prismic.io/field-day-sound/06452877-fe97-48f0-a632-ede21bc94866_Nike+-+We+Are+Witnesses_03.jpg?auto=compress,format",
-  //       "imageText": null,
-  //       "secondImageUrl": "https://images.prismic.io/field-day-sound/ea383b17-d470-40a8-b55e-63b515ac42ab_Nike+-+Witnesses+-+Lebron+kid.jpg?auto=compress,format",
-  //       "secondImageText": null
-  //     },
-  //     {
-  //       "imageUrl": "https://images.prismic.io/field-day-sound/7e7e0cdc-a0aa-4335-b9b2-e8f80e9cb684_Nike+-+We+Are+Witnesses_06.jpg?auto=compress,format",
-  //       "imageText": null,
-  //       "secondImageText": null
-  //     }
-  //   ]
-  // },
-  // {
-  //   "uid": "celebrating-australias-sam-kerr-playing-top-notch-",
-  //   "client": "Nike",
-  //   "name": "Flip The Game",
-  //   "categories": [
-  //     "sound-design"
-  //   ],
-  //   "thumbnailUrl": "https://images.prismic.io/field-day-sound/Zgx-ict2UUcvBWCs_sm_KerrKick.jpg?auto=format,compress?auto=compress,format",
-  //   "visualUrl": "https://field-day-sound.cdn.prismic.io/field-day-sound/ZgyAM8t2UUcvBWC0_sm_Nike-FlipTheGame2.mp4",
-  //   "mainVideoUrl": "https://field-day-sound.cdn.prismic.io/field-day-sound/Zgx7Cct2UUcvBWB5_long_Nike-FlipTheGame.mp4",
-  //   "description": "Celebrating Australia's Sam Kerr playing top notch football on home turf in the 2023 Women’s World Cup. When Kerr scores, the whole world flips with her. ",
-  //   "credits": [
-  //     "Agency: Wieden + Kennedy",
-  //     "Director: ALASKA",
-  //     "Sound Designer: Morgan Johnson",
-  //     "Mixer: Natalie Huizenga",
-  //     "Mixer: Noah Woodburn"
-  //   ],
-  //   "images": [
-  //     {
-  //       "imageUrl": "https://images.prismic.io/field-day-sound/Zgx-i8t2UUcvBWCu_sm_shoejump.jpg?auto=format,compress?auto=compress,format",
-  //       "imageText": null,
-  //       "secondImageUrl": "https://images.prismic.io/field-day-sound/Zgx-h8t2UUcvBWCq_sm_couch.jpg?auto=format,compress?auto=compress,format",
-  //       "secondImageText": null
-  //     },
-  //     {
-  //       "imageUrl": "https://images.prismic.io/field-day-sound/Zgx-hst2UUcvBWCp_sm_busflip.jpg?auto=format,compress?auto=compress,format",
-  //       "imageText": null,
-  //       "secondImageUrl": "https://images.prismic.io/field-day-sound/Zgx-iMt2UUcvBWCr_sm_KerrFlip.jpg?auto=format,compress?auto=compress,format",
   //       "secondImageText": null
   //     }
   //   ]
@@ -645,114 +473,6 @@ export const homepageProjects: Project[] = [
   //     }
   //   ]
   // },
-  // {
-  //   "uid": "nike-seen-it-all",
-  //   "client": "Nike",
-  //   "name": "Seen It All",
-  //   "categories": [
-  //     "mix"
-  //   ],
-  //   "thumbnailUrl": "https://images.prismic.io/field-day-sound/3c218274-5081-48f3-b872-69f87dc76a19_thumb_nike-seen-it-all.jpg?auto=compress,format",
-  //   "visualUrl": "https://field-day-sound.cdn.prismic.io/field-day-sound/95e40c0d-ff1f-40cb-b46b-9d5bd05d1690_short_Nike+-+Seen+It+All.mp4",
-  //   "mainVideoUrl": "https://field-day-sound.cdn.prismic.io/field-day-sound/adeab7ba-e367-498f-a20b-a1149b580250_Nike+-+Seen+It+All.mp4",
-  //   "description": "Directed by and starring Spike Lee as Mars Blackmon, and Indigo Hubbard-Salk as Zimmie, paying homage to the past while making way for what’s next. ",
-  //   "credits": [
-  //     "Agency: Wieden + Kennedy",
-  //     "Director: Spike Lee",
-  //     "Sound Designer: Morgan Johnson",
-  //     "Mixer: Noah Woodburn"
-  //   ],
-  //   "images": [
-  //     {
-  //       "imageUrl": "https://images.prismic.io/field-day-sound/8f22023a-aa0b-4435-9c1c-e0050d21d89a_Nike+-+Seen+It+All_01.jpg?auto=compress,format",
-  //       "imageText": null,
-  //       "secondImageText": null
-  //     },
-  //     {
-  //       "imageUrl": "https://images.prismic.io/field-day-sound/ffb4059f-7555-458f-a58f-ce267bc2c072_Nike+-+Seen+It+All_02.jpg?auto=compress,format",
-  //       "imageText": null,
-  //       "secondImageText": null
-  //     },
-  //     {
-  //       "imageUrl": "https://images.prismic.io/field-day-sound/3443863b-4ce6-4dde-b378-79e22b669478_Nike+-+Seen+It+All_05.jpg?auto=compress,format",
-  //       "imageText": null,
-  //       "secondImageUrl": "https://images.prismic.io/field-day-sound/f005c1d2-30f8-4cd4-a7a1-dd61b558103a_Nike+-+Seen+It+All_06.jpg?auto=compress,format",
-  //       "secondImageText": null
-  //     }
-  //   ]
-  // },
-  // {
-  //   "uid": "nike-be-better",
-  //   "client": "Nike",
-  //   "name": "Be Better",
-  //   "categories": [
-  //     "mix"
-  //   ],
-  //   "thumbnailUrl": "https://images.prismic.io/field-day-sound/f6d35ae9-9f67-489a-b511-56dff0f112a8_thumb_be+better.jpg?auto=compress,format",
-  //   "visualUrl": "https://field-day-sound.cdn.prismic.io/field-day-sound/f102e717-3fbe-494e-973e-83004ddfd5a7_short_Nike_Be+Better.mp4",
-  //   "mainVideoUrl": "https://field-day-sound.cdn.prismic.io/field-day-sound/11749856-9992-4500-a2e9-164aa05f07d5_full_Nike_Be+Better.mp4",
-  //   "description": "In his own words, Kobe described his Mamba Mentality by saying, \"It’s to constantly try to be the best version of yourself. It's a constant quest to try to be better today than you were yesterday.\" While incremental change may feel small in the short term, those subtle shifts culminate to greater progress over time. This relentless drive for improvement is the legacy Kobe leaves.",
-  //   "credits": [
-  //     "Agency: Wieden + Kennedy",
-  //     "Director: Melina Matsoukas",
-  //     "Sound Design & Mix: Noah Woodburn",
-  //     "Notes: Emmy Nomination 2021"
-  //   ],
-  //   "images": [
-  //     {
-  //       "imageUrl": "https://images.prismic.io/field-day-sound/e2588017-15fa-4911-aeeb-bc6c7bb4b062_Still_Be+Better_1.jpg?auto=compress,format",
-  //       "imageText": null,
-  //       "secondImageText": null
-  //     },
-  //     {
-  //       "imageUrl": "https://images.prismic.io/field-day-sound/dab6ad07-0ede-4622-ac69-fc8e89e5e4e2_Still_Be+Better_2.jpg?auto=compress,format",
-  //       "imageText": null,
-  //       "secondImageUrl": "https://images.prismic.io/field-day-sound/3fe8b71d-df3b-4d60-82b0-667954223c28_Still_Be+Better_4.jpg?auto=compress,format",
-  //       "secondImageText": null
-  //     },
-  //     {
-  //       "imageUrl": "https://images.prismic.io/field-day-sound/10b89ec9-f3a3-4f5e-8ef2-64809b421dae_Still_Be+Better_3.jpg?auto=compress,format",
-  //       "imageText": null,
-  //       "secondImageText": null
-  //     }
-  //   ]
-  // },
-  // {
-  //   "uid": "nike-dream-further",
-  //   "client": "Nike",
-  //   "name": "Dream Further",
-  //   "categories": [
-  //     "sound-design",
-  //     "mix"
-  //   ],
-  //   "thumbnailUrl": "https://images.prismic.io/field-day-sound/3aecfbe4-1eb5-4463-ac2c-c1a3f716aa14_thumb_Nike+-+Dream+Further.jpg?auto=compress,format",
-  //   "visualUrl": "https://field-day-sound.cdn.prismic.io/field-day-sound/a08a718a-aeec-4e6e-9c8d-decd6113a26f_short_Nike+-+Dream+Further_1.mp4",
-  //   "mainVideoUrl": "https://field-day-sound.cdn.prismic.io/field-day-sound/f9165889-ff9f-4114-bb88-2bb9e0b27379_full_Nike+-+Dream+Further_1.mp4",
-  //   "description": "Don't change your dream. Change the world. ",
-  //   "credits": [
-  //     "Agency: Wieden + Kennedy",
-  //     "Director: Francois Rousselet",
-  //     "Sound Design & Mix: Noah Woodburn"
-  //   ],
-  //   "images": [
-  //     {
-  //       "imageUrl": "https://images.prismic.io/field-day-sound/b7f9b33f-1037-4240-992a-b2ee619ccf83_Nike+-+Dream+Further_01.jpg?auto=compress,format",
-  //       "imageText": null,
-  //       "secondImageText": null
-  //     },
-  //     {
-  //       "imageUrl": "https://images.prismic.io/field-day-sound/5159d256-2698-46ac-9be8-7659681f23b4_Nike+-+Dream+Further_03.jpg?auto=compress,format",
-  //       "imageText": null,
-  //       "secondImageText": null
-  //     },
-  //     {
-  //       "imageUrl": "https://images.prismic.io/field-day-sound/4b93e21e-78ad-4ea0-b6d2-505eb1071a40_Nike+-+Dream+Further_04.jpg?auto=compress,format",
-  //       "imageText": null,
-  //       "secondImageUrl": "https://images.prismic.io/field-day-sound/b8b01729-d47d-4024-908d-d38bcd3cf62c_Nike+-+Dream+Further_05.jpg?auto=compress,format",
-  //       "secondImageText": null
-  //     }
-  //   ]
-  // }
 ];
 
 export const about: AboutData = {

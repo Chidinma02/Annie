@@ -6,11 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { projects } from '../data/db';
 
-const CATEGORIES = [
-  { id: 'sound-design', label: 'sound design' },
-  { id: 'music', label: 'music' },
-  { id: 'mix', label: 'mix' }
-];
+
 
 const isImageUrl = (url: string | null): boolean => {
   if (!url) return false;

@@ -74,9 +74,7 @@ export default function AboutPage() {
             <p className="leading-[1.7] tracking-tight">
               Voss Water // GTFW // Hingees // Tomi Juice // Juicyway // Kronicles // Peperminkk // ELC // Dixtrict 26 // Caveat Emptor // Seabreeze
             </p>
-            {/* <p className="leading-[1.7] tracking-tight">
-              Nike // TaylorMade // YETI // Voss Water // GTFW // Hingees // Tomi Juice // Juicyway // Kronicles // Peperminkk // ELC // Dixtrict 26 // Caveat Emptor // Seabreeze // Apple Music // Geico // Guess USA // Netflix // Arista Records // RCA Records
-            </p> */}
+
           </div>
 
         </div>
