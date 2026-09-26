@@ -60,7 +60,7 @@ export const projects: Project[] = [
     "visualUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786602406/IJGB_dcvfux.mp4",
     "mainVideoUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786602406/IJGB_dcvfux.mp4",
     "aspectRatio": "landscape",
-    "description": "At IJGB, I led the visual design across the brand's always-on content and campaign work, educational infographics, and PR visuals. Beyond the day-to-day, I shaped moodboards and visual systems for brand campaigns. I delivered motion graphics, video edits, flyers, design presentation decks, and merch design for one-off projects and launches.Working across static design, motion, and photography, I became a go-to for the team on anything visual - helping keep the brand consistent, campaigns sharper, and creative bottlenecks minimal.",
+    "description": "Led always-on visual design across IJGB’s digital ecosystem, directing content for the Telegram community, the educational \"Forex in 90 Seconds\" series, and featured PR media. Shaped campaign creative direction from initial moodboards to final execution—delivering motion graphics, flyers, roll-up banners, and merchandise designs across static and animated deliverables to ensure a cohesive, high-impact brand presence.",
     // "credits": [
     //   "Sound Design & Mix: Aniedoabasi"
     // ],
@@ -95,7 +95,7 @@ export const projects: Project[] = [
     "visualUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1787106077/MOV_5230_1_btg8wz.mp4",
     "landscapeColumns": 3,
     "mainVideoUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1787106077/MOV_5230_1_btg8wz.mp4",
-    "description": "Shot and edited web launch photography and staff headshots, then edited and color graded the campaign videos — delivering a consistent visual identity across the entire launch.",
+    "description": "Partnered directly with the in-house design team to deliver website and identity photography for Juicyway’s Nigeria launch. Expanded into campaign post-production—cutting and color grading video assets to maintain clean, consistent visual storytelling that introduced the brand to the Nigerian market with impact.",
     // "credits": [
     //   "Sound Design & Mix: Aniedoabasi"
     // ],
@@ -364,6 +364,7 @@ export const projects: Project[] = [
   },
   {
     "uid": "huddle",
+    "year": "2023-2025",
     "client": "Huddle",
     "name": "The Return",
     "categories": [
@@ -374,7 +375,7 @@ export const projects: Project[] = [
     "visualUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786646285/The_Return_of_the_Huddle_cp_z4l2xc.mp4",
     "mainVideoUrl": "https://res.cloudinary.com/duyiomsdf/video/upload/w_1920,c_limit,f_auto,q_auto/v1786646285/The_Return_of_the_Huddle_cp_z4l2xc.mp4",
     "aspectRatio": "landscape",
-    "description": "",
+    "description": "Owned photo and video output end-to-end—shooting, editing, and color grading every deliverable to establish and preserve a sharp, unified visual standard. Marking my longest continuous creative engagement on record, I served as the brand's trusted visual anchor, safeguarding production quality and brand consistency across an ever-evolving slate of content.",
     // "description": "Sound design and mix for The Return of the Huddle by Aniedoabasi.",
     // "credits": [
     //   "Sound Design & Mix: Aniedoabasi"
